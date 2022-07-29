@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+    height: 100%;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     color: #424242;
@@ -10,12 +16,24 @@ body {
     line-height: 24px;
 }
 
-ul,h1,h2,h3,h4,h5,h6,p{
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     padding: 0;
     margin: 0;
 }
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     line-height: 1.5em;
 }
 
@@ -30,7 +48,7 @@ a {
     line-height: 30px;
     color: #E56F54;
 
-    &:hover{
+    &:hover {
         color: #424242;
     }
 }
@@ -47,16 +65,60 @@ button {
     border: 1px solid #E56F54;
     border-radius: 40px;
 
-    &:hover{
+    &:hover {
         color: #FFF;
         background: #E56F54;
     }
 }
 
-a, a:hover,
-button, button:hover,
-svg, svg:hover {
+a,
+a:hover,
+button,
+button:hover,
+svg,
+svg:hover {
     transition: all 0.3s ease;
+}
+
+input,
+textarea {
+    padding: 13px 58px 13px 20px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #ccc;
+    width: 100%;
+
+    &::placeholder {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        color: #ccc;
+        opacity: 1;
+    }
+
+    &:focus{
+        outline: none;
+        border: 1px solid #424242;
+        color: #424242;
+    }
+}
+
+textarea {
+    min-height: 300px;
+    resize: none;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main {
+    flex: 1 0 auto;
 }
 
 .container {
