@@ -76,7 +76,11 @@ a:hover,
 button,
 button:hover,
 svg,
-svg:hover {
+svg:hover,
+span,
+span:hover,
+li,
+li:hover {
     transition: all 0.3s ease;
 }
 
@@ -119,10 +123,16 @@ textarea {
 
 .main {
     flex: 1 0 auto;
+    padding: 70px 0 100px;
 }
 
 .container {
     max-width: 1330px;
     margin: 0 auto;
     padding: 0 30px;
+}
+
+.title {
+    font-size: 64px;
+    line-height: 1.2em;
 }
