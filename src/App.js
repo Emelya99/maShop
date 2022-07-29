@@ -1,9 +1,8 @@
+import 'normalize.css';
+import './style.scss';
+
 function App() {
-  return (
-    <div className="App">
-      <h1>Test 123</h1>
-    </div>
-  );
+  return <div className="App">test</div>;
 }
 
 export default App;
