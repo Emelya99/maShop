@@ -3,6 +3,7 @@ import styles from './Menu.module.scss';
 import Title from '../Title';
 import Sort from '../Sort';
 import Categories from '../Categories';
+import Product from '../Product';
 
 const Menu = () => {
   return (
@@ -12,6 +13,15 @@ const Menu = () => {
         <Sort />
       </div>
       <Categories />
+      <div className={styles.products}>
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+      </div>
     </>
   );
 };

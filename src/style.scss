@@ -80,7 +80,9 @@ svg:hover,
 span,
 span:hover,
 li,
-li:hover {
+li:hover,
+p,
+p:hover {
     transition: all 0.3s ease;
 }
 
@@ -103,11 +105,17 @@ textarea {
         opacity: 1;
     }
 
-    &:focus{
+    &:focus {
         outline: none;
         border: 1px solid #424242;
         color: #424242;
     }
+}
+
+img {
+    max-width: 100%;
+    width: 100%;
+    display: block;
 }
 
 textarea {
