@@ -2,16 +2,26 @@
     width: 25%;
     padding: 0 15px;
     margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     & img {
         margin-bottom: 20px;
     }
 }
 
+.productTop {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .title {
     color: #424242;
     font-weight: 700;
     text-align: center;
+    margin-top: auto;
     margin-bottom: 10px;
     display: block;
     font-size: 20px;
