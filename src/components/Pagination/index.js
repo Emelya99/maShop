@@ -14,7 +14,10 @@ const Pagination = () => {
         <Icon name="arrow-left" />
       </li>
       {pageCount.map((item, index) => (
-        <li onClick={() => setPage(index)} className={page === index ? styles.active : ''}>
+        <li
+          key={index}
+          onClick={() => setPage(index)}
+          className={page === index ? styles.active : ''}>
           {item}
         </li>
       ))}
