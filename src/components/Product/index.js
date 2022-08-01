@@ -1,22 +1,33 @@
+import React from 'react';
 import styles from './Product.module.scss';
 
-const Product = () => {
+const Product = ({ title, imgUrl, sizes, price }) => {
+  const [sizeActive, setSizeActive] = React.useState(0);
+  const [addCartCount, setAddCartCount] = React.useState(1);
+
+  const sizesProduct = ['26⌀', '30⌀', '40⌀'];
+
   return (
     <div className={styles.product}>
       <a href="/">
-        <img src="img/1.jpg" alt="product" />
+        <img src={imgUrl} alt="product" />
       </a>
       <a className={styles.title} href="/">
-        Mexican pizza
+        {title}
       </a>
       <div className={styles.variables}>
-        <p className={styles.active}>30⌀</p>
-        <p>40⌀</p>
+        {sizes.map((size, index) => (
+          <p
+            onClick={() => setSizeActive(index)}
+            className={sizeActive === index ? styles.active : ''}>
+            {sizesProduct[size]}
+          </p>
+        ))}
       </div>
       <div className={styles.bottom}>
-        <p>From 200 $</p>
-        <button>
-          + Add<span>1</span>
+        <p>From {price} $</p>
+        <button onClick={() => setAddCartCount((prev) => prev + 1)}>
+          + Add<span>{addCartCount}</span>
         </button>
       </div>
     </div>
