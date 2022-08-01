@@ -95,6 +95,28 @@ const Icon = ({ name }) => {
           <path d="M0 6L6 0L12 6H0Z" fill="#424242" />
         </svg>
       );
+    case 'arrow-left':
+      return (
+        <svg
+          width="8"
+          height="14"
+          viewBox="0 0 8 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.78873 14L0 7L6.78873 0L8 1.24896L2.42253 7L8 12.751L6.78873 14Z" />
+        </svg>
+      );
+    case 'arrow-right':
+      return (
+        <svg
+          width="8"
+          height="14"
+          viewBox="0 0 8 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.21127 14L0 12.751L5.57747 7L0 1.24896L1.21127 0L8 7L1.21127 14Z" />
+        </svg>
+      );
     default:
       return <svg></svg>;
   }

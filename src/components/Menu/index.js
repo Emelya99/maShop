@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import styles from './Menu.module.scss';
 
@@ -6,7 +7,7 @@ import Title from '../Title';
 import Sort from '../Sort';
 import Categories from '../Categories';
 import Product from '../Product';
-import axios from 'axios';
+import Pagination from '../Pagination';
 
 const Menu = () => {
   const [products, setProducts] = React.useState([]);
@@ -29,6 +30,7 @@ const Menu = () => {
           <Product key={product.id} {...product} />
         ))}
       </div>
+      <Pagination />
     </>
   );
 };

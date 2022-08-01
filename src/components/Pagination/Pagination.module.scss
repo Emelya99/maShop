@@ -1,0 +1,33 @@
+.pagination {
+    display: flex;
+
+    & li {
+        width: 40px;
+        height: 40px;
+        background: #E4E4E4;
+        border-radius: 50px;
+        color: #424242;
+        font-weight: 500;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 15px;
+        }
+
+        &:hover,
+        &.active {
+            color: #FFF;
+            background: #E56F54;
+
+            & svg {
+                fill: #FFF;
+            }
+        }
+
+        & svg {
+            fill: #424242;
+        }
+    }
+}
