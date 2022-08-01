@@ -26,6 +26,10 @@
             }
         }
 
+        &.active {
+            pointer-events: none;
+        }
+
         & svg {
             fill: #424242;
         }

@@ -19,6 +19,10 @@
             background: #E56F54;
         }
 
+        &.active {
+            pointer-events: none;
+        }
+
         &:not(:last-child) {
             margin-right: 15px;
         }

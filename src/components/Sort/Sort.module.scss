@@ -1,11 +1,11 @@
 .sort {
     position: relative;
-    cursor: pointer;
 }
 
 .sortContent {
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     &:hover span {
         color: #424242;
@@ -37,13 +37,14 @@
     border-radius: 20px;
     z-index: 5;
     padding: 20px 0;
-    width: 200px;
+    width: 220px;
 
     & li {
         font-weight: 500;
         font-size: 24px;
         line-height: 40px;
         text-align: center;
+        cursor: pointer;
 
         &:not(:last-child){
             margin-bottom: 10px;
@@ -52,6 +53,10 @@
         &:hover,
         &.active {
             color: #E56F54;
+        }
+
+        &.active {
+            pointer-events: none;
         }
     }
 }

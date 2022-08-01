@@ -13,21 +13,38 @@ import Pagination from '../Pagination';
 const Menu = () => {
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [activeCategory, setActiveCategory] = React.useState(0);
+  const [activeSort, setActiveSort] = React.useState({
+    name: 'popularity (↓)',
+    sortProperty: 'rating',
+  });
 
   React.useEffect(() => {
-    axios.get('https://62e76c9f93938a545bd1363a.mockapi.io/product').then((res) => {
-      setProducts(res.data);
-      setIsLoading(false);
-    });
-  }, []);
+    setIsLoading(true);
+
+    const category = activeCategory > 0 ? `category=${activeCategory}` : '';
+    const sort = activeSort.sortProperty.replace('-', '');
+    const order = activeSort.sortProperty.includes('-') ? 'asc' : 'desc';
+
+    axios
+      .get(
+        `https://62e76c9f93938a545bd1363a.mockapi.io/product?${category}&sortBy=${sort}&order=${order}`,
+      )
+      .then((res) => {
+        setProducts(res.data);
+        setIsLoading(false);
+      });
+
+    window.scrollTo(0, 0);
+  }, [activeCategory, activeSort]);
 
   return (
     <>
       <div className={styles.topWrapper}>
         <Title title="Menu" />
-        <Sort />
+        <Sort value={activeSort} onChangeSort={(obj) => setActiveSort(obj)} />
       </div>
-      <Categories />
+      <Categories value={activeCategory} onChangeCategory={setActiveCategory} />
       <div className={styles.products}>
         {isLoading
           ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)

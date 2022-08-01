@@ -2,14 +2,19 @@ import Icon from '../IconsGenerator';
 import styles from './Sort.module.scss';
 import React from 'react';
 
-const Sort = () => {
+const Sort = ({ value, onChangeSort }) => {
   const [openSort, setOpenSort] = React.useState(false);
-  const [activeSort, setActiveSort] = React.useState(0);
 
-  const sort = ['popularity', 'price', 'alphabet'];
+  const sort = [
+    { name: 'popularity (↓)', sortProperty: 'rating' },
+    { name: 'popularity (↑)', sortProperty: '-rating' },
+    { name: 'price (↓)', sortProperty: 'price' },
+    { name: 'price (↑)', sortProperty: '-price' },
+    { name: 'alphabet', sortProperty: 'title' },
+  ];
 
-  const onClickSortItem = (index) => {
-    setActiveSort(index);
+  const onClickSortItem = (obj) => {
+    onChangeSort(obj);
     setOpenSort(false);
   };
 
@@ -18,18 +23,18 @@ const Sort = () => {
       <div className={styles.sortContent} onClick={() => setOpenSort(!openSort)}>
         {openSort ? <Icon name="sort-close" /> : <Icon name="sort-open" />}
         <p>
-          Sort by:<span>{sort[activeSort]}</span>
+          Sort by:<span>{value.name}</span>
         </p>
       </div>
       {openSort && (
         <div className={styles.sortBox}>
           <ul>
-            {sort.map((item, index) => (
+            {sort.map((obj, index) => (
               <li
-                onClick={() => onClickSortItem(index)}
+                onClick={() => onClickSortItem(obj)}
                 key={index}
-                className={activeSort === index ? styles.active : ''}>
-                {item}
+                className={value.name === obj.name ? styles.active : ''}>
+                {obj.name}
               </li>
             ))}
           </ul>
