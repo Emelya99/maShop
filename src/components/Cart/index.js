@@ -1,4 +1,3 @@
-import React from 'react';
 import Title from '../Title';
 import styles from './Cart.module.scss';
 
