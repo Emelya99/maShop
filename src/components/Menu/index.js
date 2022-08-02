@@ -14,10 +14,16 @@ const Menu = () => {
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeCategory, setActiveCategory] = React.useState(0);
+  const [currentProduct, setCurrentProduct] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState(1);
   const [activeSort, setActiveSort] = React.useState({
     name: 'popularity (↓)',
     sortProperty: 'rating',
   });
+
+  const countPage = Math.ceil(currentProduct / 8);
+
+  console.log(countPage);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -28,15 +34,16 @@ const Menu = () => {
 
     axios
       .get(
-        `https://62e76c9f93938a545bd1363a.mockapi.io/product?${category}&sortBy=${sort}&order=${order}`,
+        `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPage}&limit=8&${category}&sortBy=${sort}&order=${order}`,
       )
       .then((res) => {
-        setProducts(res.data);
+        setProducts(res.data.items);
+        setCurrentProduct(res.data.count);
         setIsLoading(false);
       });
 
     window.scrollTo(0, 0);
-  }, [activeCategory, activeSort]);
+  }, [activeCategory, activeSort, currentPage]);
 
   return (
     <>
@@ -50,7 +57,7 @@ const Menu = () => {
           ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
           : products.map((product) => <Product key={product.id} {...product} />)}
       </div>
-      <Pagination />
+      {countPage === 1 ? null : <Pagination countPage={countPage} onChangePage={setCurrentPage} />}
     </>
   );
 };

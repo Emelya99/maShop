@@ -1,23 +1,19 @@
 .pagination {
     display: flex;
 
-    & li {
+    & a {
         width: 40px;
         height: 40px;
         background: #E4E4E4;
         border-radius: 50px;
         color: #424242;
         font-weight: 500;
+        font-size: 20px;
         line-height: 40px;
         text-align: center;
         cursor: pointer;
 
-        &:not(:last-child) {
-            margin-right: 15px;
-        }
-
-        &:hover,
-        &.active {
+        &:hover{
             color: #FFF;
             background: #E56F54;
 
@@ -26,12 +22,28 @@
             }
         }
 
-        &.active {
-            pointer-events: none;
-        }
-
         & svg {
             fill: #424242;
+        }
+    }
+
+    & li {
+        display: inline-flex;
+
+        &:not(:last-child) {
+            margin-right: 15px;
+        }
+    }
+
+    :global {
+        .selected a {
+            color: #FFF;
+            background: #E56F54;
+            pointer-events: none;
+        }
+        
+        .disabled {
+            pointer-events: none;
         }
     }
 }
