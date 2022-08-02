@@ -13,13 +13,17 @@
     max-width: 595px;
     width: 100%;
     position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    right: 20px;
+    cursor: pointer;
+    padding-top: 2px;
 
     & svg {
-        position: absolute;
-        top: 50%;
-        transform: translate(0%, -50%);
-        right: 20px;
-        cursor: pointer;
         fill: #424242;
 
         &:hover {

@@ -23,8 +23,6 @@ const Menu = () => {
 
   const countPage = Math.ceil(currentProduct / 8);
 
-  console.log(countPage);
-
   React.useEffect(() => {
     setIsLoading(true);
 
