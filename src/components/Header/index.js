@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 
-import { SearchContext } from '../../App';
+import { MenuContext } from '../../App';
 import Icon from '../IconsGenerator';
 
 const Header = () => {
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
-  console.log(searchValue);
+  const { searchValue, setSearchValue, setCurrentPage } = React.useContext(MenuContext);
+
+  const onChangeSearchValue = (e) => {
+    setSearchValue(e.target.value);
+    setCurrentPage(1);
+  };
+
   return (
     <div className={styles.header}>
       <div className="container">
@@ -21,7 +26,7 @@ const Header = () => {
               className={styles.input}
               placeholder="Search..."
               value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
+              onChange={(e) => onChangeSearchValue(e)}
             />
             {searchValue && (
               <div className={styles.close} onClick={() => setSearchValue('')}>

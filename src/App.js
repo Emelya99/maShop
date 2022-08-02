@@ -10,14 +10,15 @@ import Menu from './components/Menu';
 import Cart from './components/Cart';
 import NotFound from './components/NotFound';
 
-export const SearchContext = React.createContext('');
+export const MenuContext = React.createContext('');
 
 function App() {
   const [searchValue, setSearchValue] = React.useState('');
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
     <div className="app">
-      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+      <MenuContext.Provider value={{ searchValue, setSearchValue, currentPage, setCurrentPage }}>
         <Header />
         <main className="main">
           <div className="container">
@@ -29,7 +30,7 @@ function App() {
           </div>
         </main>
         <Footer />
-      </SearchContext.Provider>
+      </MenuContext.Provider>
     </div>
   );
 }
