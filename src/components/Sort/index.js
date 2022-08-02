@@ -10,7 +10,7 @@ const Sort = ({ value, onChangeSort }) => {
     { name: 'popularity (↑)', sortProperty: '-rating' },
     { name: 'price (↓)', sortProperty: 'price' },
     { name: 'price (↑)', sortProperty: '-price' },
-    { name: 'alphabet', sortProperty: 'title' },
+    { name: 'alphabet', sortProperty: '-title' },
   ];
 
   const onClickSortItem = (obj) => {
