@@ -10,17 +10,20 @@ import Categories from '../Categories';
 import Product from '../Product';
 import Skeleton from './Skeleton';
 import Pagination from '../Pagination';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategory } from '../../redux/slices/filterSlice';
 
 const Menu = () => {
+  const { activeCategory, sort } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
   const { searchValue, currentPage } = React.useContext(MenuContext);
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [activeCategory, setActiveCategory] = React.useState(0);
   const [currentProduct, setCurrentProduct] = React.useState(0);
-  const [activeSort, setActiveSort] = React.useState({
-    name: 'popularity (↓)',
-    sortProperty: 'rating',
-  });
+
+  const onChangeCategory = (id) => {
+    dispatch(setCategory(id));
+  };
 
   const countPage = Math.ceil(currentProduct / 8);
   const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
@@ -31,12 +34,12 @@ const Menu = () => {
   React.useEffect(() => {
     setIsLoading(true);
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
-    const sort = activeSort.sortProperty.replace('-', '');
-    const order = activeSort.sortProperty.includes('-') ? 'asc' : 'desc';
+    const sortValue = sort.sortProperty.replace('-', '');
+    const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
 
     axios
       .get(
-        `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPage}&limit=8&${category}&sortBy=${sort}&order=${order}&search=${searchValue}`,
+        `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPage}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
       )
       .then((res) => {
         setProducts(res.data.items);
@@ -44,15 +47,15 @@ const Menu = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory, activeSort, currentPage, searchValue, currentProduct]);
+  }, [activeCategory, sort, currentPage, searchValue, currentProduct]);
 
   return (
     <>
       <div className={styles.topWrapper}>
         <Title title="Menu" />
-        <Sort value={activeSort} onChangeSort={(obj) => setActiveSort(obj)} />
+        <Sort />
       </div>
-      <Categories value={activeCategory} onChangeCategory={setActiveCategory} />
+      <Categories value={activeCategory} onChangeCategory={onChangeCategory} />
       <div className={styles.products}>{isLoading ? skeleton : productRender}</div>
       {countPage === 1 ? null : <Pagination countPage={countPage} />}
     </>
