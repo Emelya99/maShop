@@ -8,10 +8,16 @@ import Icon from '../IconsGenerator';
 
 const Header = () => {
   const { searchValue, setSearchValue, setCurrentPage } = React.useContext(MenuContext);
+  const inputRef = React.useRef();
 
   const onChangeSearchValue = (e) => {
     setSearchValue(e.target.value);
     setCurrentPage(1);
+  };
+
+  const onClickClear = () => {
+    setSearchValue('');
+    inputRef.current.focus();
   };
 
   return (
@@ -23,13 +29,14 @@ const Header = () => {
           </Link>
           <div className={styles.input}>
             <input
+              ref={inputRef}
               className={styles.input}
               placeholder="Search..."
               value={searchValue}
               onChange={(e) => onChangeSearchValue(e)}
             />
             {searchValue && (
-              <div className={styles.close} onClick={() => setSearchValue('')}>
+              <div className={styles.close} onClick={onClickClear}>
                 <Icon name="close" />
               </div>
             )}
