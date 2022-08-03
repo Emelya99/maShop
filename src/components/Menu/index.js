@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import styles from './Menu.module.scss';
 
-import { MenuContext } from '../../App';
 import Title from '../Title';
 import Sort from '../Sort';
 import Categories from '../Categories';
@@ -14,9 +13,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCategory } from '../../redux/slices/filterSlice';
 
 const Menu = () => {
-  const { activeCategory, sort, searchValue } = useSelector((state) => state.filter);
+  const { activeCategory, sort, searchValue, currentPaginationNumber } = useSelector(
+    (state) => state.filter,
+  );
   const dispatch = useDispatch();
-  const { currentPage } = React.useContext(MenuContext);
   const [products, setProducts] = React.useState([]);
   const [currentProduct, setCurrentProduct] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -24,12 +24,6 @@ const Menu = () => {
   const onChangeCategory = (id) => {
     dispatch(setCategory(id));
   };
-
-  const countPage = Math.ceil(currentProduct / 8);
-  const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
-  const productRender = products
-    .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
-    .map((product) => <Product key={product.id} {...product} />);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -39,7 +33,7 @@ const Menu = () => {
 
     axios
       .get(
-        `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPage}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
+        `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
       )
       .then((res) => {
         setProducts(res.data.items);
@@ -47,7 +41,13 @@ const Menu = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory, sort, currentPage, searchValue, currentProduct]);
+  }, [activeCategory, sort, currentPaginationNumber, searchValue, currentProduct]);
+
+  const countPage = Math.ceil(currentProduct / 8);
+  const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
+  const productRender = products
+    .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
+    .map((product) => <Product key={product.id} {...product} />);
 
   return (
     <>
