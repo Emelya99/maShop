@@ -3,18 +3,21 @@ import debounce from 'lodash.debounce';
 import styles from '../Header/Header.module.scss';
 import { MenuContext } from '../../App';
 import Icon from '../IconsGenerator';
+import { useDispatch } from 'react-redux';
+import { setSearchValue } from '../../redux/slices/filterSlice';
 
 const Search = () => {
+  const dispatch = useDispatch();
   const [value, setValue] = React.useState('');
-  const { setSearchValue, setCurrentPage } = React.useContext(MenuContext);
+  const { setCurrentPage } = React.useContext(MenuContext);
   const inputRef = React.useRef();
 
   const debouncedSearch = React.useMemo(
     () =>
       debounce((val) => {
-        setSearchValue(val);
+        dispatch(setSearchValue(val));
       }, 450),
-    [setSearchValue],
+    [dispatch],
   );
 
   const onChangeSearchValue = React.useCallback(
@@ -27,7 +30,7 @@ const Search = () => {
   );
 
   const onClickClear = () => {
-    setSearchValue('');
+    dispatch(setSearchValue(''));
     setValue('');
     inputRef.current.focus();
   };

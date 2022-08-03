@@ -13,12 +13,11 @@ import NotFound from './components/NotFound';
 export const MenuContext = React.createContext('');
 
 function App() {
-  const [searchValue, setSearchValue] = React.useState('');
   const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
     <div className="app">
-      <MenuContext.Provider value={{ searchValue, setSearchValue, currentPage, setCurrentPage }}>
+      <MenuContext.Provider value={{ currentPage, setCurrentPage }}>
         <Header />
         <main className="main">
           <div className="container">

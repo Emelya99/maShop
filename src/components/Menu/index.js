@@ -14,12 +14,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCategory } from '../../redux/slices/filterSlice';
 
 const Menu = () => {
-  const { activeCategory, sort } = useSelector((state) => state.filter);
+  const { activeCategory, sort, searchValue } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
-  const { searchValue, currentPage } = React.useContext(MenuContext);
+  const { currentPage } = React.useContext(MenuContext);
   const [products, setProducts] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
   const [currentProduct, setCurrentProduct] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const onChangeCategory = (id) => {
     dispatch(setCategory(id));
