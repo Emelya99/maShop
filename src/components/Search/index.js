@@ -34,13 +34,7 @@ const Search = () => {
 
   return (
     <div className={styles.input}>
-      <input
-        ref={inputRef}
-        className={styles.input}
-        placeholder="Search..."
-        value={value}
-        onChange={onChangeSearchValue}
-      />
+      <input ref={inputRef} placeholder="Search..." value={value} onChange={onChangeSearchValue} />
       {value && (
         <div className={styles.close} onClick={onClickClear}>
           <Icon name="close" />

@@ -10,3 +10,16 @@
     flex-wrap: wrap;
     margin: 0 -15px;
 }
+
+@media(max-width:475px) {
+
+    .topWrapper {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+
+        & h1 {
+            margin-bottom: 40px;
+        }
+    }
+}

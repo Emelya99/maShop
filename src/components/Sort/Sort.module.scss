@@ -46,7 +46,7 @@
         text-align: center;
         cursor: pointer;
 
-        &:not(:last-child){
+        &:not(:last-child) {
             margin-bottom: 10px;
         }
 
@@ -57,6 +57,34 @@
 
         &.active {
             pointer-events: none;
+        }
+    }
+}
+
+@media(max-width:1024px) {
+
+    .sortContent {
+
+        & p {
+            font-size: 20px;
+            line-height: 24px;
+        }
+    }
+}
+
+@media(max-width:560px) {
+
+    .sortBox {
+        right: auto;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        top: 40px;
+        padding: 10px 0;
+        width: 200px;
+
+        & li {
+            font-size: 20px;
+            line-height: 30px;
         }
     }
 }

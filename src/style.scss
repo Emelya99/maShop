@@ -144,3 +144,27 @@ textarea {
     font-size: 64px;
     line-height: 1.2em;
 }
+
+@media(max-width:1024px) {
+
+    .title {
+        font-size: 48px;
+    }
+    
+}
+
+@media(max-width:767px) {
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .main {
+        padding: 60px 0;
+    }
+    
+}

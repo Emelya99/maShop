@@ -35,17 +35,82 @@
 .cart {
     background: #E56F54;
     border-radius: 40px;
-    padding: 5px 15px;
+    padding: 8px 16px;
     display: flex;
     align-items: center;
 
     & span {
         font-weight: 600;
+        font-size: 20px;
         line-height: 30px;
         color: #FFF;
     }
 
     & svg {
         margin: 0 15px;
+    }
+}
+
+@media(max-width:1024px) {
+
+    .input {
+        max-width: 400px;
+    }
+}
+
+@media(max-width:860px) {
+
+    .input {
+        max-width: 300px;
+    }
+}
+
+@media(max-width:700px) {
+
+    .wrapper {
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .input {
+        max-width: 330px;
+    }
+}
+
+@media(max-width:560px) {
+
+    .logo {
+        width: auto;
+        order: 1;
+        margin: 0;
+
+        & svg {
+            max-width: 120px;
+        }
+    }
+
+    .cart {
+        order: 2;
+        padding: 6px 12px;
+
+        & span {
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        & svg {
+            margin: 0 8px;
+        }
+    }
+
+    .input {
+        margin-top: 15px;
+        max-width: 100%;
+        order: 3;
     }
 }

@@ -13,7 +13,7 @@
         text-align: center;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             color: #FFF;
             background: #E56F54;
 
@@ -41,9 +41,16 @@
             background: #E56F54;
             pointer-events: none;
         }
-        
+
         .disabled {
             pointer-events: none;
         }
+    }
+}
+
+@media(max-width:560px) {
+
+    .pagination {
+        justify-content: center;
     }
 }
