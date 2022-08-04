@@ -11,13 +11,14 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
   const dispatch = useDispatch();
 
   const addedCount = cartItem ? cartItem.count : 0;
+  const priceActive = Boolean(price[sizeActive]) ? price[sizeActive] : price;
 
   const onClickAddItem = () => {
     const obj = {
       id,
       title,
       imgUrl,
-      price,
+      price: priceActive,
       size: sizes[sizeActive],
     };
     dispatch(addItem(obj));
@@ -52,7 +53,7 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
           <button onClick={onClickAddItem}>
             + Add {addedCount > 0 && <span>{addedCount}</span>}
           </button>
-          <p>{price} $</p>
+          <p>{priceActive} $</p>
         </div>
       </div>
     </div>
