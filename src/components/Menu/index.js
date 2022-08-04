@@ -56,7 +56,10 @@ const Menu = () => {
         <Sort />
       </div>
       <Categories value={activeCategory} onChangeCategory={onChangeCategory} />
-      <div className={styles.products}>{isLoading ? skeleton : productRender}</div>
+      <div className={styles.products}>
+        {isLoading ? skeleton : productRender}
+        {productRender.length === 0 && <p className={styles.nothing}>Nothing found</p>}
+      </div>
       {countPage === 1 ? null : <Pagination countPage={countPage} />}
     </>
   );
