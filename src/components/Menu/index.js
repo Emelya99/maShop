@@ -26,21 +26,27 @@ const Menu = () => {
   };
 
   React.useEffect(() => {
-    setIsLoading(true);
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const sortValue = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
 
-    axios
-      .get(
-        `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
-      )
-      .then((res) => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const res = await axios.get(
+          `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
+        );
         setProducts(res.data.items);
         setCurrentProduct(res.data.count);
+        window.scrollTo(0, 0);
+      } catch (err) {
+        alert('Error when receiving products');
+      } finally {
         setIsLoading(false);
-      });
-    window.scrollTo(0, 0);
+      }
+    }
+
+    fetchData();
   }, [activeCategory, sort, currentPaginationNumber, searchValue, currentProduct]);
 
   const countPage = Math.ceil(currentProduct / 8);
