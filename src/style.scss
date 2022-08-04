@@ -145,12 +145,29 @@ textarea {
     line-height: 1.2em;
 }
 
+.btn {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #E56F54;
+    padding: 15px 45px;
+    background: #FFFFFF;
+    border: 1px solid #E56F54;
+    border-radius: 40px;
+
+    &:hover {
+        color: #FFF;
+        background: #E56F54;
+    }
+}
+
 @media(max-width:1024px) {
 
     .title {
         font-size: 48px;
     }
-    
+
 }
 
 @media(max-width:767px) {
@@ -166,5 +183,5 @@ textarea {
     .main {
         padding: 60px 0;
     }
-    
+
 }
