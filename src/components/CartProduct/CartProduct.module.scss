@@ -1,0 +1,154 @@
+.product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    border-top: 1px solid #424242;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    width: 50%;
+
+    & img {
+        max-width: 188px;
+    }
+}
+
+.info {
+    margin-left: 45px;
+
+    & h3 {
+        font-size: 24px;
+        line-height: 30px;
+        margin-bottom: 15px;
+    }
+
+    & p {
+        font-size: 18px;
+    }
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+}
+
+.count {
+    display: flex;
+    align-items: center;
+
+    & span {
+        margin: 0 20px;
+        font-weight: 700;
+    }
+
+    & button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #E56F54;
+        position: relative;
+        border: none;
+
+        &:hover {
+            background-color: #424242;
+        }
+
+        & svg {
+            fill: #FFF;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.price {
+    margin-left: 120px;
+    font-weight: 700;
+    color: #E56F54;
+}
+
+.delete {
+    margin-left: 120px;
+
+    & svg {
+        fill: #424242;
+        cursor: pointer;
+
+        &:hover {
+            fill: #E56F54;
+        }
+    }
+}
+
+@media(max-width:1024px) {
+
+    .left {
+
+        & img {
+            max-width: 120px;
+        }
+    }
+
+    .info {
+        margin-left: 20px;
+
+        & h3 {
+            font-size: 20px;
+            line-height: 24px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .price {
+        margin-left: 60px;
+    }
+
+    .delete {
+        margin-left: 60px;
+    }
+}
+
+@media(max-width:767px) {
+
+    .product {
+        flex-wrap: wrap;
+    }
+
+    .left {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .right {
+        width: 100%;
+    }
+}
+
+@media(max-width:425px){
+
+    .right{
+        justify-content: space-between;
+    }
+
+    .count {
+
+        & span{
+            margin: 0 10px;
+        }
+    }
+
+    .price{
+        margin: 0 30px;
+    }
+
+    .delete{
+        margin-left: 0;
+    }
+}
