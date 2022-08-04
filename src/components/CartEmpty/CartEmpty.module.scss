@@ -1,0 +1,27 @@
+.wrapper {
+    text-align: center;
+    padding-top: 70px;
+
+    & h1,
+    & svg {
+        margin-bottom: 40px;
+    }
+}
+
+@media(max-width:1024px){
+
+    .wrapper{
+        padding-top: 0;
+    }
+}
+
+@media(max-width:767px){
+
+    .wrapper{
+
+        & svg {
+            max-width: 120px;
+            margin-bottom: 0;
+        }
+    }
+}
