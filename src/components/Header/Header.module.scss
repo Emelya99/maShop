@@ -7,12 +7,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .input {
     max-width: 595px;
     width: 100%;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0%);
 }
 
 .close {
@@ -38,6 +41,8 @@
     padding: 8px 16px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    min-width: 170px;
 
     & span {
         font-weight: 600;
@@ -79,6 +84,8 @@
 
     .input {
         max-width: 330px;
+        position: static;
+        transform: translate(0%, 0%);
     }
 }
 

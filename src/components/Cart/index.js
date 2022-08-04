@@ -3,26 +3,39 @@ import Title from '../Title';
 import styles from './Cart.module.scss';
 import CartProduct from '../CartProduct';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearItems } from '../../redux/slices/cartSlice';
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const { items, totalPrice } = useSelector((state) => state.cart);
+
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
+  const onRemoveAllProduct = () => {
+    if (window.confirm('Empty shopping cart?')) {
+      dispatch(clearItems());
+    }
+  };
+
   return (
     <div className={styles.cart}>
       <div className={styles.topWrapper}>
         <Title title="Cart" />
-        <p>
+        <p onClick={onRemoveAllProduct}>
           <Icon name="delete-all" />
           Delete all
         </p>
       </div>
       <div className={styles.products}>
-        <CartProduct />
-        <CartProduct />
-        <CartProduct />
+        {items.map((obj, index) => (
+          <CartProduct key={index} {...obj} />
+        ))}
       </div>
       <div className={styles.bottomWrapper}>
         <div className={styles.left}>
           <p>
-            Total Products: <span>3 things</span>
+            Total Products: <span>{totalCount} things</span>
           </p>
           <Link to="/">
             <Icon name="arrow-back" />
@@ -31,8 +44,9 @@ const Cart = () => {
         </div>
         <div className={styles.right}>
           <p>
-            Order price: <span>1000 $</span>
+            Order price: <span>{totalPrice} $</span>
           </p>
+          {}
           <Link to="/">Pay</Link>
         </div>
       </div>

@@ -1,29 +1,51 @@
 import React from 'react';
 import Icon from '../IconsGenerator';
 import styles from './CartProduct.module.scss';
+import { useDispatch } from 'react-redux';
+import { removeItem, addItem, onMinusCount } from '../../redux/slices/cartSlice';
 
-const CartProduct = () => {
+const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
+  const dispatch = useDispatch();
+
+  const onClickRemoveItem = () => {
+    if (window.confirm('Are you sure you want to delete?')) {
+      dispatch(removeItem(id));
+    }
+  };
+
+  const clickAddCount = () => {
+    dispatch(
+      addItem({
+        id,
+      }),
+    );
+  };
+
+  const clickMinusCount = () => {
+    dispatch(onMinusCount(id));
+  };
+
   return (
     <div className={styles.product}>
       <div className={styles.left}>
-        <img src="img/1.jpg" alt="product" />
+        <img src={imgUrl} alt={title} />
         <div className={styles.info}>
-          <h3>Mexican pizza</h3>
-          <p>30см</p>
+          <h3>{title}</h3>
+          <p>{size}</p>
         </div>
       </div>
       <div className={styles.right}>
         <div className={styles.count}>
-          <button>
+          <button onClick={clickMinusCount} className={count === 1 ? styles.disabled : ''}>
             <Icon name="minus" />
           </button>
-          <span>1</span>
-          <button>
+          <span>{count}</span>
+          <button onClick={clickAddCount}>
             <Icon name="plus" />
           </button>
         </div>
-        <p className={styles.price}>200 $</p>
-        <div className={styles.delete}>
+        <p className={styles.price}>{price * count} $</p>
+        <div onClick={onClickRemoveItem} className={styles.delete}>
           <Icon name="delete-single" />
         </div>
       </div>

@@ -1,11 +1,29 @@
 import React from 'react';
 import styles from './Product.module.scss';
 
-const Product = ({ title, imgUrl, sizes, price }) => {
-  const [sizeActive, setSizeActive] = React.useState(0);
-  const [addCartCount, setAddCartCount] = React.useState(1);
+import { useDispatch, useSelector } from 'react-redux';
 
-  const sizesProduct = ['26⌀', '30⌀', '40⌀'];
+import { addItem } from '../../redux/slices/cartSlice';
+
+const sizesProduct = ['26⌀', '30⌀', '40⌀'];
+
+const Product = ({ id, title, imgUrl, sizes, price }) => {
+  const [sizeActive, setSizeActive] = React.useState(0);
+  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+  const dispatch = useDispatch();
+
+  const addedCount = cartItem ? cartItem.count : 0;
+
+  const onClickAddItem = () => {
+    const obj = {
+      id,
+      title,
+      imgUrl,
+      price,
+      size: sizeActive,
+    };
+    dispatch(addItem(obj));
+  };
 
   return (
     <div className={styles.product}>
@@ -29,10 +47,10 @@ const Product = ({ title, imgUrl, sizes, price }) => {
           ))}
         </div>
         <div className={styles.bottom}>
-          <p>From {price} $</p>
-          <button onClick={() => setAddCartCount((prev) => prev + 1)}>
-            + Add<span>{addCartCount}</span>
+          <button onClick={onClickAddItem}>
+            + Add {addedCount > 0 && <span>{addedCount}</span>}
           </button>
+          <p>{price} $</p>
         </div>
       </div>
     </div>

@@ -40,6 +40,8 @@
 .count {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    width: 150px;
 
     & span {
         margin: 0 20px;
@@ -65,17 +67,23 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        &.disabled {
+            pointer-events: none;
+        }
     }
 }
 
 .price {
-    margin-left: 120px;
+    margin: 0 60px;
     font-weight: 700;
     color: #E56F54;
+    width: 150px;
+    text-align: center;
 }
 
 .delete {
-    margin-left: 120px;
+    margin-top: 4px;
 
     & svg {
         fill: #424242;
@@ -107,11 +115,7 @@
     }
 
     .price {
-        margin-left: 60px;
-    }
-
-    .delete {
-        margin-left: 60px;
+        margin: 0px;
     }
 }
 
@@ -138,17 +142,10 @@
     }
 
     .count {
+        justify-content: flex-start;
 
         & span{
             margin: 0 10px;
         }
-    }
-
-    .price{
-        margin: 0 30px;
-    }
-
-    .delete{
-        margin-left: 0;
     }
 }
