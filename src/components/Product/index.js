@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addItem } from '../../redux/slices/cartSlice';
 
-const sizesProduct = ['26⌀', '30⌀', '40⌀'];
-
 const Product = ({ id, title, imgUrl, sizes, price }) => {
   const [sizeActive, setSizeActive] = React.useState(0);
   const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
@@ -20,7 +18,7 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
       title,
       imgUrl,
       price,
-      size: sizeActive,
+      size: sizes[sizeActive],
     };
     dispatch(addItem(obj));
   };
@@ -36,16 +34,20 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
         </a>
       </div>
       <div>
-        <div className={styles.variables}>
-          {sizes.map((size, index) => (
-            <p
-              key={index}
-              onClick={() => setSizeActive(index)}
-              className={sizeActive === index ? styles.active : ''}>
-              {sizesProduct[size]}
-            </p>
-          ))}
-        </div>
+        {sizes.length > 0 ? (
+          <div className={styles.variables}>
+            {sizes.map((size, index) => (
+              <p
+                key={index}
+                onClick={() => setSizeActive(index)}
+                className={sizeActive === index ? styles.active : ''}>
+                {size}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.variablesEmpty}></div>
+        )}
         <div className={styles.bottom}>
           <button onClick={onClickAddItem}>
             + Add {addedCount > 0 && <span>{addedCount}</span>}
