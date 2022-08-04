@@ -1,6 +1,6 @@
+import React from 'react';
 import Icon from '../IconsGenerator';
 import styles from './Sort.module.scss';
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../../redux/slices/filterSlice';
 
@@ -16,14 +16,29 @@ const Sort = () => {
   const dispatch = useDispatch();
   const value = useSelector((state) => state.filter.sort.name);
   const [openSort, setOpenSort] = React.useState(false);
+  const sortRef = React.useRef();
 
   const onClickSortItem = (obj) => {
     dispatch(setSort(obj));
     setOpenSort(false);
   };
 
+  React.useEffect(() => {
+    const onClickOutsideSort = (e) => {
+      if (!e.path.includes(sortRef.current)) {
+        setOpenSort(false);
+      }
+    };
+
+    document.body.addEventListener('click', onClickOutsideSort);
+
+    return () => {
+      document.body.removeEventListener('click', onClickOutsideSort);
+    };
+  });
+
   return (
-    <div className={styles.sort}>
+    <div ref={sortRef} className={styles.sort}>
       <div className={styles.sortContent} onClick={() => setOpenSort(!openSort)}>
         {openSort ? <Icon name="sort-close" /> : <Icon name="sort-open" />}
         <p>
