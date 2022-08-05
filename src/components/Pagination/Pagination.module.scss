@@ -1,5 +1,6 @@
 .pagination {
     display: flex;
+    flex-wrap: wrap;
 
     & a {
         width: 40px;
@@ -44,6 +45,22 @@
 
         .disabled {
             pointer-events: none;
+        }
+    }
+}
+
+@media(max-width:1024px){
+
+    .pagination{
+        justify-content: center;
+        margin-bottom: -15px;
+
+        & li {
+            margin: 0 7.5px 15px;
+
+            &:not(:last-child){
+                margin: 0 7.5px 15px;
+            }
         }
     }
 }

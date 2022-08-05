@@ -29,7 +29,7 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
   return (
     <div className={styles.product}>
       <div className={styles.productTop}>
-        <div>
+        <div className={styles.img}>
           <img src={imgUrl} alt="product" />
         </div>
         <div className={styles.title}>{title}</div>
