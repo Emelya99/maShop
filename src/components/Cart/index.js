@@ -14,10 +14,8 @@ const Cart = () => {
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
-  const onRemoveAllProduct = async () => {
+  const onRemoveAllProduct = () => {
     if (window.confirm('Empty shopping cart?')) {
-      console.log(items);
-      // await axios.delete(`https://62e76c9f93938a545bd1363a.mockapi.io/cart/`);
       dispatch(clearItems());
     }
   };

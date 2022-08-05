@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { getItems } from '../../redux/slices/cartSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTotalPrice } from '../../redux/slices/cartSlice';
 
 import styles from './Header.module.scss';
 
@@ -11,17 +9,20 @@ import Icon from '../IconsGenerator';
 import Search from '../Search';
 
 const Header = () => {
-  const dispatch = useDispatch();
-
   const { items, totalPrice } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const isMounted = React.useRef(false);
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
   React.useEffect(() => {
-    axios.get(`https://62e76c9f93938a545bd1363a.mockapi.io/cart`).then((res) => {
-      dispatch(getItems(res.data));
-    });
-  }, [dispatch]);
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+    dispatch(getTotalPrice());
+  }, [items, dispatch]);
 
   return (
     <div className={styles.header}>
