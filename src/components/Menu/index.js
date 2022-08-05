@@ -11,22 +11,20 @@ import Skeleton from './Skeleton';
 import Pagination from '../Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, setCurrentProductOnPage } from '../../redux/slices/filterSlice';
-import { setAllProduct } from '../../redux/slices/productSlice';
+import { setAllProduct, setIsLoading } from '../../redux/slices/productSlice';
 
 const Menu = () => {
   const { activeCategory, sort, searchValue, currentPaginationNumber, currentProductOnPage } =
     useSelector((state) => state.filter);
-  const { allProduct } = useSelector((state) => state.product);
+  const { allProduct, isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-
-  const [isLoading, setIsLoading] = React.useState(true);
 
   const onChangeCategory = (id) => {
     dispatch(setCategory(id));
   };
 
   React.useEffect(() => {
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
 
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const sortValue = sort.sortProperty.replace('-', '');
@@ -43,7 +41,7 @@ const Menu = () => {
       } catch (err) {
         alert('Error when receiving products');
       } finally {
-        setIsLoading(false);
+        dispatch(setIsLoading(false));
       }
     }
 

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   allProduct: [],
-  //   countProductOnPage: 0,
+  isLoading: true,
 };
 
 export const productSlice = createSlice({
@@ -12,12 +12,12 @@ export const productSlice = createSlice({
     setAllProduct(state, action) {
       state.allProduct = action.payload;
     },
-    // setCountProductOnPage(state, action) {
-    //   state.countProductOnPage = action.payload;
-    // },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setAllProduct, setCountProductOnPage } = productSlice.actions;
+export const { setAllProduct, setIsLoading } = productSlice.actions;
 
 export default productSlice.reducer;
