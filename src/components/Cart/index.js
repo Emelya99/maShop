@@ -14,6 +14,8 @@ const Cart = () => {
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
+  console.log(items);
+
   const onRemoveAllProduct = () => {
     if (window.confirm('Empty shopping cart?')) {
       dispatch(clearItems());
@@ -34,8 +36,8 @@ const Cart = () => {
         </p>
       </div>
       <div className={styles.products}>
-        {items.map((obj) => (
-          <CartProduct key={obj.id} {...obj} />
+        {items.map((obj, index) => (
+          <CartProduct key={index} {...obj} />
         ))}
       </div>
       <div className={styles.bottomWrapper}>

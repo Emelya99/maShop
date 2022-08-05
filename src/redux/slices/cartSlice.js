@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   totalPrice: 0,
+  // items: [],
   items: JSON.parse(localStorage.getItem('cart')) || [],
 };
 
@@ -15,7 +16,9 @@ export const cartSlice = createSlice({
       }, 0);
     },
     addItem(state, action) {
-      const findItem = state.items.find((obj) => obj.id === action.payload.id);
+      const findItem = state.items.find(
+        (obj) => obj.id === action.payload.id && obj.size === action.payload.size,
+      );
 
       if (findItem) {
         findItem.count++;
@@ -31,7 +34,9 @@ export const cartSlice = createSlice({
       }, 0);
     },
     onMinusCount(state, action) {
-      const findItem = state.items.find((obj) => obj.id === action.payload);
+      const findItem = state.items.find(
+        (obj) => obj.id === action.payload.id && obj.size === action.payload.size,
+      );
 
       if (findItem) {
         findItem.count--;
@@ -42,7 +47,11 @@ export const cartSlice = createSlice({
       }, 0);
     },
     removeItem(state, action) {
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      // state.items = state.items.filter((obj) => obj !== action.payload);
+      const index = state.items.findIndex(
+        (obj) => obj.id === action.payload.id && obj.size === action.payload.size,
+      );
+      state.items.splice(index, 1);
 
       state.totalPrice = state.items.reduce((sum, obj) => {
         return obj.price * obj.count + sum;

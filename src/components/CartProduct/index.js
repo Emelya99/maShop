@@ -9,7 +9,7 @@ const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
 
   const onClickRemoveItem = () => {
     if (window.confirm('Are you sure you want to delete?')) {
-      dispatch(removeItem(id));
+      dispatch(removeItem({ id, size }));
     }
   };
 
@@ -17,12 +17,13 @@ const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
     dispatch(
       addItem({
         id,
+        size,
       }),
     );
   };
 
   const clickMinusCount = () => {
-    dispatch(onMinusCount(id));
+    dispatch(onMinusCount({ id, size }));
   };
 
   return (

@@ -7,7 +7,9 @@ import { addItem } from '../../redux/slices/cartSlice';
 
 const Product = ({ id, title, imgUrl, sizes, price }) => {
   const [sizeActive, setSizeActive] = React.useState(0);
-  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+  const cartItem = useSelector((state) =>
+    state.cart.items.find((obj) => obj.id === id && obj.size === sizes[sizeActive]),
+  );
   const dispatch = useDispatch();
 
   const addedCount = cartItem ? cartItem.count : 0;
@@ -27,12 +29,10 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
   return (
     <div className={styles.product}>
       <div className={styles.productTop}>
-        <a href="/">
+        <div>
           <img src={imgUrl} alt="product" />
-        </a>
-        <a className={styles.title} href="/">
-          {title}
-        </a>
+        </div>
+        <div className={styles.title}>{title}</div>
       </div>
       <div>
         {sizes.length > 0 ? (
