@@ -10,15 +10,15 @@ import Product from '../Product';
 import Skeleton from './Skeleton';
 import Pagination from '../Pagination';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory } from '../../redux/slices/filterSlice';
+import { setCategory, setCurrentProductOnPage } from '../../redux/slices/filterSlice';
+import { setAllProduct } from '../../redux/slices/productSlice';
 
 const Menu = () => {
-  const { activeCategory, sort, searchValue, currentPaginationNumber } = useSelector(
-    (state) => state.filter,
-  );
+  const { activeCategory, sort, searchValue, currentPaginationNumber, currentProductOnPage } =
+    useSelector((state) => state.filter);
+  const { allProduct } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const [products, setProducts] = React.useState([]);
-  const [currentProduct, setCurrentProduct] = React.useState(0);
+
   const [isLoading, setIsLoading] = React.useState(true);
 
   const onChangeCategory = (id) => {
@@ -26,18 +26,19 @@ const Menu = () => {
   };
 
   React.useEffect(() => {
+    setIsLoading(true);
+
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const sortValue = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
 
     async function fetchData() {
       try {
-        setIsLoading(true);
         const res = await axios.get(
           `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
         );
-        setProducts(res.data.items);
-        setCurrentProduct(res.data.count);
+        dispatch(setAllProduct(res.data.items));
+        dispatch(setCurrentProductOnPage(res.data.count));
         window.scrollTo(0, 0);
       } catch (err) {
         alert('Error when receiving products');
@@ -47,11 +48,11 @@ const Menu = () => {
     }
 
     fetchData();
-  }, [activeCategory, sort, currentPaginationNumber, searchValue, currentProduct]);
+  }, [activeCategory, sort, currentPaginationNumber, searchValue, currentProductOnPage, dispatch]);
 
-  const countPage = Math.ceil(currentProduct / 8);
+  const countPage = Math.ceil(currentProductOnPage / 8);
   const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
-  const productRender = products
+  const productRender = allProduct
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) => <Product key={product.id} {...product} />);
 

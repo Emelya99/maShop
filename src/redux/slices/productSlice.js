@@ -10,7 +10,7 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     setAllProduct(state, action) {
-      state.allProduct = [...state, action.payload];
+      state.allProduct = action.payload;
     },
     // setCountProductOnPage(state, action) {
     //   state.countProductOnPage = action.payload;

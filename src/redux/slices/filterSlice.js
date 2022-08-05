@@ -4,6 +4,7 @@ const initialState = {
   activeCategory: 0,
   searchValue: '',
   currentPaginationNumber: 1,
+  currentProductOnPage: 0,
   sort: {
     name: 'popularity (↓)',
     sortProperty: 'rating',
@@ -29,8 +30,8 @@ export const filterSlice = createSlice({
     setCurrentPaginationNumber(state, action) {
       state.currentPaginationNumber = action.payload;
     },
-    setCountProductOnPage(state, action) {
-      state.countProductOnPage = action.payload;
+    setCurrentProductOnPage(state, action) {
+      state.currentProductOnPage = action.payload;
     },
   },
 });
@@ -40,7 +41,7 @@ export const {
   setSort,
   setSearchValue,
   setCurrentPaginationNumber,
-  setCountProductOnPage,
+  setCurrentProductOnPage,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
