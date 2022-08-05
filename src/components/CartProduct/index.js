@@ -3,17 +3,22 @@ import Icon from '../IconsGenerator';
 import styles from './CartProduct.module.scss';
 import { useDispatch } from 'react-redux';
 import { removeItem, addItem, onMinusCount } from '../../redux/slices/cartSlice';
+import axios from 'axios';
 
 const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
   const dispatch = useDispatch();
 
-  const onClickRemoveItem = () => {
+  const onClickRemoveItem = async () => {
     if (window.confirm('Are you sure you want to delete?')) {
+      await axios.delete(`https://62e76c9f93938a545bd1363a.mockapi.io/cart/${id}`);
       dispatch(removeItem(id));
     }
   };
 
-  const clickAddCount = () => {
+  const clickAddCount = async () => {
+    await axios.put(`https://62e76c9f93938a545bd1363a.mockapi.io/cart/${id}`, {
+      count: count + 1,
+    });
     dispatch(
       addItem({
         id,
@@ -21,7 +26,10 @@ const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
     );
   };
 
-  const clickMinusCount = () => {
+  const clickMinusCount = async () => {
+    await axios.put(`https://62e76c9f93938a545bd1363a.mockapi.io/cart/${id}`, {
+      count: count - 1,
+    });
     dispatch(onMinusCount(id));
   };
 

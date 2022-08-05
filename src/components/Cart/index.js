@@ -1,3 +1,4 @@
+import React from 'react';
 import Icon from '../IconsGenerator';
 import Title from '../Title';
 import styles from './Cart.module.scss';
@@ -13,8 +14,10 @@ const Cart = () => {
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
-  const onRemoveAllProduct = () => {
+  const onRemoveAllProduct = async () => {
     if (window.confirm('Empty shopping cart?')) {
+      console.log(items);
+      // await axios.delete(`https://62e76c9f93938a545bd1363a.mockapi.io/cart/`);
       dispatch(clearItems());
     }
   };
@@ -33,8 +36,8 @@ const Cart = () => {
         </p>
       </div>
       <div className={styles.products}>
-        {items.map((obj, index) => (
-          <CartProduct key={index} {...obj} />
+        {items.map((obj) => (
+          <CartProduct key={obj.id} {...obj} />
         ))}
       </div>
       <div className={styles.bottomWrapper}>
