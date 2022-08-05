@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   totalPrice: 0,
-  // items: [],
   items: JSON.parse(localStorage.getItem('cart')) || [],
 };
 
@@ -47,7 +46,6 @@ export const cartSlice = createSlice({
       }, 0);
     },
     removeItem(state, action) {
-      // state.items = state.items.filter((obj) => obj !== action.payload);
       const index = state.items.findIndex(
         (obj) => obj.id === action.payload.id && obj.size === action.payload.size,
       );

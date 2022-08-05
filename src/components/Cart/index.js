@@ -14,8 +14,6 @@ const Cart = () => {
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
-  console.log(items);
-
   const onRemoveAllProduct = () => {
     if (window.confirm('Empty shopping cart?')) {
       dispatch(clearItems());
