@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/maShop/static/css/main.17b2f594.css",
+    "main.js": "/maShop/static/js/main.cacc1aac.js",
+    "index.html": "/maShop/index.html",
+    "main.17b2f594.css.map": "/maShop/static/css/main.17b2f594.css.map",
+    "main.cacc1aac.js.map": "/maShop/static/js/main.cacc1aac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.17b2f594.css",
+    "static/js/main.cacc1aac.js"
+  ]
+}
