@@ -32,11 +32,15 @@ const Menu = () => {
 
     async function fetchData() {
       try {
-        const res = await axios.get(
-          `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
-        );
-        dispatch(setAllProduct(res.data.items));
-        dispatch(setCurrentProductOnPage(res.data.count));
+        // const res = await axios.get(
+        //   `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
+        // );
+        // dispatch(setAllProduct(res.data.items));
+        // dispatch(setCurrentProductOnPage(res.data.count));
+        // window.scrollTo(0, 0);
+        const res = await axios.get(`http://localhost/mashop/wp-json/wp/v2/products`);
+        dispatch(setAllProduct(res.data));
+        dispatch(setCurrentProductOnPage(res.data.length));
         window.scrollTo(0, 0);
       } catch (err) {
         alert('Error when receiving products');
@@ -51,7 +55,7 @@ const Menu = () => {
   const countPage = Math.ceil(currentProductOnPage / 8);
   const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
   const productRender = allProduct
-    .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
+    .filter((obj) => obj.title.rendered.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) => <Product key={product.id} {...product} />);
 
   return (

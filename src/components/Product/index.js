@@ -5,23 +5,37 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addItem } from '../../redux/slices/cartSlice';
 
-const Product = ({ id, title, imgUrl, sizes, price }) => {
+const Product = ({ id, title, acf }) => {
   const [sizeActive, setSizeActive] = React.useState(0);
   const cartItem = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id && obj.size === sizes[sizeActive]),
+    state.cart.items.find((obj) => obj.id === id && obj.size === allSizesProduct[sizeActive]),
   );
   const dispatch = useDispatch();
 
+  const allSizesProduct = [];
+  allSizesProduct.push(acf.sizes);
+  allSizesProduct.push(acf.sizes2);
+  allSizesProduct.push(acf.sizes3);
+
+  const allPriceProduct = [];
+  allPriceProduct.push(acf.price);
+  allPriceProduct.push(acf.price2);
+  allPriceProduct.push(acf.price3);
+
   const addedCount = cartItem ? cartItem.count : 0;
-  const priceActive = Boolean(price[sizeActive]) ? price[sizeActive] : price;
+  const priceActive = Boolean(allPriceProduct[sizeActive])
+    ? allPriceProduct[sizeActive]
+    : acf.price;
+  const activeSize = Boolean(allSizesProduct[sizeActive]) ? allSizesProduct[sizeActive] : null;
+  console.log(activeSize, priceActive);
 
   const onClickAddItem = () => {
     const obj = {
       id,
-      title,
-      imgUrl,
+      title: title.rendered,
+      // imgUrl,
       price: priceActive,
-      size: sizes[sizeActive],
+      size: activeSize,
     };
     dispatch(addItem(obj));
   };
@@ -30,14 +44,14 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
     <div className={styles.product}>
       <div className={styles.productTop}>
         <div className={styles.img}>
-          <img src={imgUrl} alt="product" />
+          <img src="/img/1.jpg" alt="product" />
         </div>
-        <div className={styles.title}>{title}</div>
+        <div className={styles.title}>{title.rendered}</div>
       </div>
       <div>
-        {sizes.length > 0 ? (
+        {allSizesProduct.length > 0 ? (
           <div className={styles.variables}>
-            {sizes.map((size, index) => (
+            {allSizesProduct.map((size, index) => (
               <p
                 key={index}
                 onClick={() => setSizeActive(index)}
