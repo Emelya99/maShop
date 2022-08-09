@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addItem } from '../../redux/slices/cartSlice';
 
-const Product = ({ id, title, acf }) => {
+const Product = ({ id, acf }) => {
   const [sizeActive, setSizeActive] = React.useState(0);
 
   const allSizesProduct = Object.values(acf.sizes);
@@ -22,7 +22,7 @@ const Product = ({ id, title, acf }) => {
   const onClickAddItem = () => {
     const obj = {
       id,
-      title: title.rendered,
+      title: acf.title,
       imgUrl: acf.image.url,
       imgAlt: acf.image.alt,
       price: allPriceProduct[sizeActive],
@@ -37,10 +37,10 @@ const Product = ({ id, title, acf }) => {
         <div className={styles.img}>
           <img src={acf.image.url} alt={acf.image.alt} />
         </div>
-        <div className={styles.title}>{title.rendered}</div>
+        <div className={styles.title}>{acf.title}</div>
       </div>
       <div>
-        {filteredSizeProduct.length > 0 ? (
+        {filteredSizeProduct.length > 0 && (
           <div className={styles.variables}>
             {filteredSizeProduct.map((size, index) => (
               <p
@@ -51,8 +51,6 @@ const Product = ({ id, title, acf }) => {
               </p>
             ))}
           </div>
-        ) : (
-          <div className={styles.variablesEmpty}></div>
         )}
         <div className={styles.bottom}>
           <button onClick={onClickAddItem}>
