@@ -35,9 +35,6 @@ const Menu = () => {
         // const res = await axios.get(
         //   `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
         // );
-        // dispatch(setAllProduct(res.data.items));
-        // dispatch(setCurrentProductOnPage(res.data.count));
-        // window.scrollTo(0, 0);
         const res = await axios.get(`http://localhost/mashop/wp-json/wp/v2/products`);
         dispatch(setAllProduct(res.data));
         dispatch(setCurrentProductOnPage(res.data.length));

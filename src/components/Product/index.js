@@ -7,35 +7,26 @@ import { addItem } from '../../redux/slices/cartSlice';
 
 const Product = ({ id, title, acf }) => {
   const [sizeActive, setSizeActive] = React.useState(0);
+
+  const allSizesProduct = Object.values(acf.sizes);
+  const filteredSizeProduct = allSizesProduct.filter((e) => e);
+  const allPriceProduct = Object.values(acf.price);
+
   const cartItem = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id && obj.size === allSizesProduct[sizeActive]),
+    state.cart.items.find((obj) => obj.id === id && obj.size === filteredSizeProduct[sizeActive]),
   );
   const dispatch = useDispatch();
 
-  const allSizesProduct = [];
-  allSizesProduct.push(acf.sizes);
-  allSizesProduct.push(acf.sizes2);
-  allSizesProduct.push(acf.sizes3);
-
-  const allPriceProduct = [];
-  allPriceProduct.push(acf.price);
-  allPriceProduct.push(acf.price2);
-  allPriceProduct.push(acf.price3);
-
   const addedCount = cartItem ? cartItem.count : 0;
-  const priceActive = Boolean(allPriceProduct[sizeActive])
-    ? allPriceProduct[sizeActive]
-    : acf.price;
-  const activeSize = Boolean(allSizesProduct[sizeActive]) ? allSizesProduct[sizeActive] : null;
-  console.log(activeSize, priceActive);
 
   const onClickAddItem = () => {
     const obj = {
       id,
       title: title.rendered,
-      // imgUrl,
-      price: priceActive,
-      size: activeSize,
+      imgUrl: acf.image.url,
+      imgAlt: acf.image.alt,
+      price: allPriceProduct[sizeActive],
+      size: filteredSizeProduct[sizeActive],
     };
     dispatch(addItem(obj));
   };
@@ -44,14 +35,14 @@ const Product = ({ id, title, acf }) => {
     <div className={styles.product}>
       <div className={styles.productTop}>
         <div className={styles.img}>
-          <img src="/img/1.jpg" alt="product" />
+          <img src={acf.image.url} alt={acf.image.alt} />
         </div>
         <div className={styles.title}>{title.rendered}</div>
       </div>
       <div>
-        {allSizesProduct.length > 0 ? (
+        {filteredSizeProduct.length > 0 ? (
           <div className={styles.variables}>
-            {allSizesProduct.map((size, index) => (
+            {filteredSizeProduct.map((size, index) => (
               <p
                 key={index}
                 onClick={() => setSizeActive(index)}
@@ -67,7 +58,7 @@ const Product = ({ id, title, acf }) => {
           <button onClick={onClickAddItem}>
             + Add {addedCount > 0 && <span>{addedCount}</span>}
           </button>
-          <p>{priceActive} $</p>
+          <p>{allPriceProduct[sizeActive]} $</p>
         </div>
       </div>
     </div>

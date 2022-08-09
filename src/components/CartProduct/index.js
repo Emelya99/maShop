@@ -4,7 +4,7 @@ import styles from './CartProduct.module.scss';
 import { useDispatch } from 'react-redux';
 import { removeItem, addItem, onMinusCount } from '../../redux/slices/cartSlice';
 
-const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
+const CartProduct = ({ id, title, count, price, imgUrl, imgAlt, size }) => {
   const dispatch = useDispatch();
 
   const onClickRemoveItem = () => {
@@ -29,7 +29,7 @@ const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
   return (
     <div className={styles.product}>
       <div className={styles.left}>
-        <img src={imgUrl} alt={title} />
+        <img src={imgUrl} alt={imgAlt} />
         <div className={styles.info}>
           <h3>{title}</h3>
           <p>{size}</p>
