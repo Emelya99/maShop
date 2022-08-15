@@ -14,8 +14,14 @@ import { setCategory, setCurrentProductOnPage } from '../../redux/slices/filterS
 import { setAllProduct, setIsLoading } from '../../redux/slices/productSlice';
 
 const Menu = () => {
-  const { activeCategory, sort, searchValue, currentPaginationNumber, currentProductOnPage } =
-    useSelector((state) => state.filter);
+  const {
+    activeCategory,
+    sort,
+    searchValue,
+    currentPaginationNumber,
+    currentProductOnPage,
+    limitProduct,
+  } = useSelector((state) => state.filter);
   const { allProduct, isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -32,12 +38,11 @@ const Menu = () => {
 
     async function fetchData() {
       try {
-        // const res = await axios.get(
-        //   `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
-        // );
-        const res = await axios.get(`http://localhost/mashop/wp-json/acf/v3/products`);
+        const res = await axios.get(
+          `http://localhost/mashop/wp-json/wp/v2/products?page=${currentPaginationNumber}&per_page=${limitProduct}&${category}&orderby=${sortValue}&order=${order}&search=${searchValue}`,
+        );
         dispatch(setAllProduct(res.data));
-        dispatch(setCurrentProductOnPage(res.data.length));
+        dispatch(setCurrentProductOnPage(res.headers['x-wp-total']));
         window.scrollTo(0, 0);
       } catch (err) {
         alert('Error when receiving products');
@@ -47,10 +52,10 @@ const Menu = () => {
     }
 
     fetchData();
-  }, [activeCategory, sort, currentPaginationNumber, searchValue, currentProductOnPage, dispatch]);
+  }, [activeCategory, sort, currentPaginationNumber, searchValue, dispatch, limitProduct]);
 
-  const countPage = Math.ceil(currentProductOnPage / 8);
-  const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
+  const countPage = Math.ceil(currentProductOnPage / limitProduct);
+  const skeleton = [...new Array(limitProduct)].map((_, index) => <Skeleton key={index} />);
   const productRender = allProduct
     .filter((obj) => obj.acf.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) => <Product key={product.id} {...product} />);
@@ -64,7 +69,9 @@ const Menu = () => {
       <Categories value={activeCategory} onChangeCategory={onChangeCategory} />
       <div className={styles.products}>
         {isLoading ? skeleton : productRender}
-        {productRender.length === 0 && <p className={styles.nothing}>Nothing found</p>}
+        {productRender.length === 0 && !isLoading && (
+          <p className={styles.nothing}>Nothing found</p>
+        )}
       </div>
       {countPage === 1 ? null : <Pagination countPage={countPage} />}
     </>

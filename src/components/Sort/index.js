@@ -7,8 +7,8 @@ import { setSort } from '../../redux/slices/filterSlice';
 const sort = [
   { name: 'popularity (↓)', sortProperty: 'rating' },
   { name: 'popularity (↑)', sortProperty: '-rating' },
-  { name: 'price (↓)', sortProperty: 'price' },
-  { name: 'price (↑)', sortProperty: '-price' },
+  { name: 'price (↓)', sortProperty: 'single_price' },
+  { name: 'price (↑)', sortProperty: '-single_price' },
   { name: 'alphabet', sortProperty: '-title' },
 ];
 

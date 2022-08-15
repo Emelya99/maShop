@@ -21,7 +21,6 @@
 
 .img {
     max-height: 295px;
-    height: 100%;
     margin-bottom: 20px;
 
     & img {
@@ -114,6 +113,16 @@
 
     .img {
         max-height: 400px;
+    }
+}
+
+@media(max-width:767px) {
+
+    .product {
+
+        &:hover {
+            transform: none;
+        }
     }
 }
 

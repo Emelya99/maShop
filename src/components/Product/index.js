@@ -11,6 +11,9 @@ const Product = ({ id, acf }) => {
   const allSizesProduct = Object.values(acf.sizes);
   const filteredSizeProduct = allSizesProduct.filter((e) => e);
   const allPriceProduct = Object.values(acf.price);
+  const filteredPriceProduct = allPriceProduct.filter((e) => e);
+  const currentProductPrice =
+    filteredPriceProduct.length === 0 ? acf.single_price : filteredPriceProduct[sizeActive];
 
   const cartItem = useSelector((state) =>
     state.cart.items.find((obj) => obj.id === id && obj.size === filteredSizeProduct[sizeActive]),
@@ -25,7 +28,7 @@ const Product = ({ id, acf }) => {
       title: acf.title,
       imgUrl: acf.image.url,
       imgAlt: acf.image.alt,
-      price: allPriceProduct[sizeActive],
+      price: currentProductPrice,
       size: filteredSizeProduct[sizeActive],
     };
     dispatch(addItem(obj));
@@ -56,7 +59,7 @@ const Product = ({ id, acf }) => {
           <button onClick={onClickAddItem}>
             + Add {addedCount > 0 && <span>{addedCount}</span>}
           </button>
-          <p>{allPriceProduct[sizeActive]} $</p>
+          <p>{currentProductPrice} $</p>
         </div>
       </div>
     </div>

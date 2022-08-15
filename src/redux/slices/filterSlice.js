@@ -5,6 +5,7 @@ const initialState = {
   searchValue: '',
   currentPaginationNumber: 1,
   currentProductOnPage: 0,
+  limitProduct: 4,
   sort: {
     name: 'popularity (↓)',
     sortProperty: 'rating',
