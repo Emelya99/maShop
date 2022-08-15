@@ -35,7 +35,7 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
         <div className={styles.title}>{title}</div>
       </div>
       <div>
-        {sizes.length > 0 ? (
+        {sizes.length > 0 && (
           <div className={styles.variables}>
             {sizes.map((size, index) => (
               <p
@@ -46,8 +46,6 @@ const Product = ({ id, title, imgUrl, sizes, price }) => {
               </p>
             ))}
           </div>
-        ) : (
-          <div className={styles.variablesEmpty}></div>
         )}
         <div className={styles.bottom}>
           <button onClick={onClickAddItem}>

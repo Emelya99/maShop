@@ -39,7 +39,7 @@ const Menu = () => {
     async function fetchData() {
       try {
         const res = await axios.get(
-          `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=${limitPage}&${category}&sortBy=${sortValue}&order=${order}`,
+          `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=${limitPage}&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
         );
         dispatch(setAllProduct(res.data.items));
         dispatch(setCurrentProductOnPage(res.data.count));
