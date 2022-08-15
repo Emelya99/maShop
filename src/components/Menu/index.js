@@ -14,8 +14,14 @@ import { setCategory, setCurrentProductOnPage } from '../../redux/slices/filterS
 import { setAllProduct, setIsLoading } from '../../redux/slices/productSlice';
 
 const Menu = () => {
-  const { activeCategory, sort, searchValue, currentPaginationNumber, currentProductOnPage } =
-    useSelector((state) => state.filter);
+  const {
+    activeCategory,
+    sort,
+    searchValue,
+    currentPaginationNumber,
+    currentProductOnPage,
+    limitPage,
+  } = useSelector((state) => state.filter);
   const { allProduct, isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -33,7 +39,7 @@ const Menu = () => {
     async function fetchData() {
       try {
         const res = await axios.get(
-          `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=8&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
+          `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=${limitPage}&${category}&sortBy=${sortValue}&order=${order}`,
         );
         dispatch(setAllProduct(res.data.items));
         dispatch(setCurrentProductOnPage(res.data.count));
@@ -48,8 +54,8 @@ const Menu = () => {
     fetchData();
   }, [activeCategory, sort, currentPaginationNumber, searchValue, currentProductOnPage, dispatch]);
 
-  const countPage = Math.ceil(currentProductOnPage / 8);
-  const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
+  const countPage = Math.ceil(currentProductOnPage / limitPage);
+  const skeleton = [...new Array(limitPage)].map((_, index) => <Skeleton key={index} />);
   const productRender = allProduct
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) => <Product key={product.id} {...product} />);
