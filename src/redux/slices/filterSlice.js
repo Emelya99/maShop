@@ -34,6 +34,9 @@ export const filterSlice = createSlice({
     setCurrentProductOnPage(state, action) {
       state.currentProductOnPage = action.payload;
     },
+    setLimitProduct(state, action) {
+      state.limitProduct = action.payload;
+    },
   },
 });
 
@@ -43,6 +46,7 @@ export const {
   setSearchValue,
   setCurrentPaginationNumber,
   setCurrentProductOnPage,
+  setLimitProduct,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
