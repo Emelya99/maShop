@@ -57,6 +57,8 @@ const Menu = () => {
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) => <Product key={product.id} {...product} />);
 
+  console.log(productRender);
+
   return (
     <>
       <div className={styles.topWrapper}>
@@ -71,7 +73,9 @@ const Menu = () => {
         )}
         {isLoading === 'error' && <p className={styles.nothing}>Server error. Try later please.</p>}
       </div>
-      {countPage === 1 ? null : <Pagination countPage={countPage} />}
+      {productRender.length === 12 || currentPaginationNumber > 1 ? (
+        <Pagination countPage={countPage} />
+      ) : null}
     </>
   );
 };
