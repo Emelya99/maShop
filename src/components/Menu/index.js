@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import styles from './Menu.module.scss';
 
@@ -10,19 +9,16 @@ import Product from '../Product';
 import Skeleton from './Skeleton';
 import Pagination from '../Pagination';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setCurrentProductOnPage } from '../../redux/slices/filterSlice';
-import { setAllProduct, setIsLoading } from '../../redux/slices/productSlice';
+import { setCategory } from '../../redux/slices/filterSlice';
+import { fetchProducts } from '../../redux/slices/productSlice';
 
 const Menu = () => {
-  const {
-    activeCategory,
-    sort,
-    searchValue,
-    currentPaginationNumber,
-    currentProductOnPage,
-    limitPage,
-  } = useSelector((state) => state.filter);
-  const { allProduct, isLoading } = useSelector((state) => state.product);
+  const { activeCategory, sort, searchValue, currentPaginationNumber } = useSelector(
+    (state) => state.filter,
+  );
+  const { allProduct, isLoading, currentProductOnPage, limitPage } = useSelector(
+    (state) => state.product,
+  );
   const dispatch = useDispatch();
 
   const onChangeCategory = (id) => {
@@ -30,29 +26,30 @@ const Menu = () => {
   };
 
   React.useEffect(() => {
-    dispatch(setIsLoading(true));
-
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const sortValue = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
 
-    async function fetchData() {
-      try {
-        const res = await axios.get(
-          `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=${limitPage}&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
-        );
-        dispatch(setAllProduct(res.data.items));
-        dispatch(setCurrentProductOnPage(res.data.count));
-        window.scrollTo(0, 0);
-      } catch (err) {
-        alert('Error when receiving products');
-      } finally {
-        dispatch(setIsLoading(false));
-      }
-    }
-
-    fetchData();
-  }, [activeCategory, sort, currentPaginationNumber, searchValue, currentProductOnPage, dispatch]);
+    dispatch(
+      fetchProducts({
+        category,
+        sortValue,
+        order,
+        currentPaginationNumber,
+        limitPage,
+        searchValue,
+      }),
+    );
+    window.scrollTo(0, 0);
+  }, [
+    activeCategory,
+    sort,
+    currentPaginationNumber,
+    searchValue,
+    currentProductOnPage,
+    limitPage,
+    dispatch,
+  ]);
 
   const countPage = Math.ceil(currentProductOnPage / limitPage);
   const skeleton = [...new Array(limitPage)].map((_, index) => <Skeleton key={index} />);
@@ -68,8 +65,11 @@ const Menu = () => {
       </div>
       <Categories value={activeCategory} onChangeCategory={onChangeCategory} />
       <div className={styles.products}>
-        {isLoading ? skeleton : productRender}
-        {productRender.length === 0 && <p className={styles.nothing}>Nothing found</p>}
+        {isLoading === 'loading' ? skeleton : productRender}
+        {isLoading === 'success' && productRender.length === 0 && (
+          <p className={styles.nothing}>Nothing found</p>
+        )}
+        {isLoading === 'error' && <p className={styles.nothing}>Server error. Try later please.</p>}
       </div>
       {countPage === 1 ? null : <Pagination countPage={countPage} />}
     </>

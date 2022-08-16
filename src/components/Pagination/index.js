@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentPaginationNumber } from '../../redux/slices/filterSlice';
 
 const Pagination = ({ countPage }) => {
-  const { currentPaginationNumber, limitPage } = useSelector((state) => state.filter);
+  const { currentPaginationNumber } = useSelector((state) => state.filter);
+  const { limitPage } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   return (
     <ReactPaginate
