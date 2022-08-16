@@ -1,12 +1,13 @@
 import Icon from '../IconsGenerator';
 import styles from './Footer.module.scss';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <div className={styles.footer}>
-      <a href="/">
-        <Icon name="logo" />
-      </a>
+      <Link to="/">
+        <Icon name="logo"></Icon>
+      </Link>
     </div>
   );
 };
