@@ -3,12 +3,14 @@ import styles from './Pagination.module.scss';
 import ReactPaginate from 'react-paginate';
 import Icon from '../IconsGenerator';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentPaginationNumber } from '../../redux/slices/filterSlice';
+import { setCurrentPaginationNumber, filterSelector } from '../../redux/slices/filterSlice';
+import { productSelector } from '../../redux/slices/productSlice';
 
 const Pagination = ({ countPage }) => {
-  const { currentPaginationNumber } = useSelector((state) => state.filter);
-  const { limitPage } = useSelector((state) => state.product);
+  const { currentPaginationNumber } = useSelector(filterSelector);
+  const { limitPage } = useSelector(productSelector);
   const dispatch = useDispatch();
+
   return (
     <ReactPaginate
       breakLabel="..."

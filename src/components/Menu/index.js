@@ -9,16 +9,13 @@ import Product from '../Product';
 import Skeleton from './Skeleton';
 import Pagination from '../Pagination';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory } from '../../redux/slices/filterSlice';
-import { fetchProducts } from '../../redux/slices/productSlice';
+import { setCategory, filterSelector } from '../../redux/slices/filterSlice';
+import { fetchProducts, productSelector } from '../../redux/slices/productSlice';
 
 const Menu = () => {
-  const { activeCategory, sort, searchValue, currentPaginationNumber } = useSelector(
-    (state) => state.filter,
-  );
-  const { allProduct, isLoading, currentProductOnPage, limitPage } = useSelector(
-    (state) => state.product,
-  );
+  const { activeCategory, sort, searchValue, currentPaginationNumber } =
+    useSelector(filterSelector);
+  const { allProduct, isLoading, currentProductOnPage, limitPage } = useSelector(productSelector);
   const dispatch = useDispatch();
 
   const onChangeCategory = (id) => {

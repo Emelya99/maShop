@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTotalPrice } from '../../redux/slices/cartSlice';
+import { getTotalPrice, cartSelector } from '../../redux/slices/cartSlice';
 
 import styles from './Header.module.scss';
 
@@ -9,8 +9,9 @@ import Icon from '../IconsGenerator';
 import Search from '../Search';
 
 const Header = () => {
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector(cartSelector);
   const dispatch = useDispatch();
+
   const isMounted = React.useRef(false);
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
