@@ -54,8 +54,6 @@ const Menu = () => {
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) => <Product key={product.id} {...product} />);
 
-  console.log(productRender);
-
   return (
     <>
       <div className={styles.topWrapper}>

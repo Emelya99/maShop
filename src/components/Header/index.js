@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTotalPrice, cartSelector } from '../../redux/slices/cartSlice';
 
@@ -11,6 +11,7 @@ import Search from '../Search';
 const Header = () => {
   const { items, totalPrice } = useSelector(cartSelector);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const isMounted = React.useRef(false);
 
@@ -32,7 +33,7 @@ const Header = () => {
           <Link className={styles.logo} to="/">
             <Icon name="logo"></Icon>
           </Link>
-          <Search />
+          {pathname === '/' && <Search />}
           <Link to="/cart" className={styles.cart}>
             <span>{totalPrice} $</span>
             <Icon name="cart"></Icon>
