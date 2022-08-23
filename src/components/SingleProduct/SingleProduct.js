@@ -2,8 +2,10 @@ import React from 'react';
 import styles from './SingleProduct.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ProductSizes from '../ProductSizes';
 
 const SingleProduct = () => {
+  const [sizeActive, setSizeActive] = React.useState(0);
   const [product, setProduct] = React.useState();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,6 +29,8 @@ const SingleProduct = () => {
     return <div>Loading...</div>;
   }
 
+  const priceActive = product.price ? product.price[sizeActive] : product.singlePrice;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -36,7 +40,16 @@ const SingleProduct = () => {
         <div className={styles.right}>
           <h1 className={styles.title}>{product.title}</h1>
           <div className={styles.priceBox}>
-            <p className={styles.price}>{product.singlePrice} $</p>
+            <p className={styles.price}>{priceActive} $</p>
+            {product.sizes.length > 0 && (
+              <div className={styles.variables}>
+                <ProductSizes
+                  sizes={product.sizes}
+                  sizeActive={sizeActive}
+                  setSizeActive={setSizeActive}
+                />
+              </div>
+            )}
           </div>
           <p className={styles.desc}>{product.desc}</p>
           <ul className={styles.properties}>
