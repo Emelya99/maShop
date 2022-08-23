@@ -1,0 +1,48 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 130px;
+}
+
+.left {
+    width: 50%;
+    padding-right: 15px;
+}
+
+.right {
+    width: 50%;
+    padding-left: 85px;
+
+    & > *:not(:last-child){
+        margin-bottom: 40px;
+    }
+}
+
+.title {
+    font-size: 36px;
+    line-height: 42px;
+}
+
+.priceBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    color: #E56F54;
+}
+
+.desc {
+    line-height: 30px;
+}
+
+.properties {
+
+    & li {
+        line-height: 30px;
+    }
+}
