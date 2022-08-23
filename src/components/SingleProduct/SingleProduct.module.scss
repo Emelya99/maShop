@@ -45,6 +45,25 @@
     line-height: 30px;
 }
 
+.addToCart {
+
+    & button {
+        padding: 17px 30px;
+        width: 100%;
+        font-size: 24px;
+        line-height: 32px;
+        justify-content: center;
+
+        & span {
+            margin-left: 12px;
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+            line-height: 32px;
+        }
+    }
+}
+
 .properties {
 
     & li {

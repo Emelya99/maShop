@@ -3,6 +3,7 @@ import styles from './SingleProduct.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProductSizes from '../ProductSizes';
+import ProductAddToCart from '../ProductAddToCart';
 
 const SingleProduct = () => {
   const [sizeActive, setSizeActive] = React.useState(0);
@@ -52,6 +53,16 @@ const SingleProduct = () => {
             )}
           </div>
           <p className={styles.desc}>{product.desc}</p>
+          <div className={styles.addToCart}>
+            <ProductAddToCart
+              id={product.id}
+              title={product.title}
+              imgUrl={product.imgUrl}
+              sizes={product.sizes}
+              sizeActive={sizeActive}
+              priceActive={priceActive}
+            />
+          </div>
           <ul className={styles.properties}>
             <li>SKU: {product.id}</li>
             <li>Rating: {product.rating}/10</li>
