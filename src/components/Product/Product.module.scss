@@ -49,34 +49,6 @@
     }
 }
 
-.variables {
-    background: #FBFBFB;
-    border-radius: 20px;
-    padding: 10px 5px;
-    display: flex;
-    justify-content: space-between;
-
-    & p {
-        background: #E4E4E4;
-        border-radius: 20px;
-        cursor: pointer;
-        padding: 6px;
-        text-align: center;
-        flex: 1 0 auto;
-        margin: 0 5px;
-
-        &:hover,
-        &.active {
-            color: #FFF;
-            background: #E56F54;
-        }
-
-        &.active {
-            pointer-events: none;
-        }
-    }
-}
-
 .bottom {
     display: flex;
     justify-content: space-between;
