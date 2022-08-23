@@ -5,6 +5,8 @@ import axios from 'axios';
 import ProductSizes from '../ProductSizes';
 import ProductAddToCart from '../ProductAddToCart';
 
+const categories = ['All', 'Pizza', 'Sushi', 'Burgers', 'Salads', 'Drinkables'];
+
 const SingleProduct = () => {
   const [sizeActive, setSizeActive] = React.useState(0);
   const [product, setProduct] = React.useState();
@@ -65,6 +67,7 @@ const SingleProduct = () => {
           </div>
           <ul className={styles.properties}>
             <li>SKU: {product.id}</li>
+            <li>Category: {categories[product.category]}</li>
             <li>Rating: {product.rating}/10</li>
           </ul>
         </div>
