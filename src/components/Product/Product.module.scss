@@ -38,15 +38,23 @@
     display: block;
     font-size: 20px;
     line-height: 24px;
+    text-transform: lowercase;
+
+    &::first-line {
+        text-transform: capitalize;
+    }
+
+    &:hover {
+        color: #E56F54;
+    }
 }
 
 .variables {
     background: #FBFBFB;
     border-radius: 20px;
-    padding: 10px;
+    padding: 10px 5px;
     display: flex;
     justify-content: space-between;
-    margin: 0 -5px;
 
     & p {
         background: #E4E4E4;
@@ -69,10 +77,6 @@
     }
 }
 
-.variablesEmpty{
-    height: 56px;
-}
-
 .bottom {
     display: flex;
     justify-content: space-between;
@@ -83,29 +87,6 @@
         font-weight: 500;
         line-height: 25px;
         color: #E56F54;
-    }
-
-    & button {
-        display: flex;
-        align-items: center;
-
-        &:hover span {
-            color: #E56F54;
-            background-color: #FFF;
-        }
-
-        & span {
-            margin-left: 5px;
-            color: #FFF;
-            background: #E56F54;
-            border-radius: 50px;
-            width: 19px;
-            height: 19px;
-            display: block;
-            text-align: center;
-            font-size: 12px;
-            line-height: 19px;
-        }
     }
 }
 

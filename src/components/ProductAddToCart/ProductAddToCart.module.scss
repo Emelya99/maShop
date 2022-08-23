@@ -1,0 +1,22 @@
+.btn {
+    display: flex;
+    align-items: center;
+
+    &:hover span {
+        color: #E56F54;
+        background-color: #FFF;
+    }
+
+    & span {
+        margin-left: 5px;
+        color: #FFF;
+        background: #E56F54;
+        border-radius: 50px;
+        width: 19px;
+        height: 19px;
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        line-height: 19px;
+    }
+}

@@ -1,38 +1,23 @@
 import React from 'react';
 import styles from './Product.module.scss';
+import { Link } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
-
-import { addItem } from '../../redux/slices/cartSlice';
+import ProductAddToCart from '../ProductAddToCart';
 
 const Product = ({ id, title, imgUrl, sizes, price, singlePrice }) => {
   const [sizeActive, setSizeActive] = React.useState(0);
-  const cartItem = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id && obj.size === sizes[sizeActive]),
-  );
-  const dispatch = useDispatch();
 
-  const addedCount = cartItem ? cartItem.count : 0;
   const priceActive = price ? price[sizeActive] : singlePrice;
-
-  const onClickAddItem = () => {
-    const obj = {
-      id,
-      title,
-      imgUrl,
-      price: priceActive,
-      size: sizes[sizeActive],
-    };
-    dispatch(addItem(obj));
-  };
 
   return (
     <div className={styles.product}>
       <div className={styles.productTop}>
-        <div className={styles.img}>
+        <Link to={`/product/${id}`} className={styles.img}>
           <img src={imgUrl} alt="product" />
-        </div>
-        <div className={styles.title}>{title}</div>
+        </Link>
+        <Link to={`/product/${id}`} className={styles.title}>
+          {title}
+        </Link>
       </div>
       <div>
         {sizes.length > 0 && (
@@ -48,9 +33,14 @@ const Product = ({ id, title, imgUrl, sizes, price, singlePrice }) => {
           </div>
         )}
         <div className={styles.bottom}>
-          <button onClick={onClickAddItem}>
-            + Add {addedCount > 0 && <span>{addedCount}</span>}
-          </button>
+          <ProductAddToCart
+            id={id}
+            title={title}
+            imgUrl={imgUrl}
+            sizes={sizes}
+            sizeActive={sizeActive}
+            priceActive={priceActive}
+          />
           <p>{priceActive} $</p>
         </div>
       </div>
