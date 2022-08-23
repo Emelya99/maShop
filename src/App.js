@@ -5,9 +5,9 @@ import './style.scss';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Menu from './components/Menu';
-import Cart from './components/Cart';
-import NotFound from './components/NotFound';
+import Home from './pages/Home';
+import CartPage from './pages/CartPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
       <main className="main">
         <div className="container">
           <Routes>
-            <Route path="/" element={<Menu />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </main>
