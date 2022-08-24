@@ -6,8 +6,9 @@ import Title from '../Title';
 import Sort from '../Sort';
 import Categories from '../Categories';
 import Product from '../Product';
-import Skeleton from './Skeleton';
+import Products from '../Products';
 import Pagination from '../Pagination';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, filterSelector } from '../../redux/slices/filterSlice';
 import { fetchProducts, productSelector } from '../../redux/slices/productSlice';
@@ -15,7 +16,7 @@ import { fetchProducts, productSelector } from '../../redux/slices/productSlice'
 const Menu = () => {
   const { activeCategory, sort, searchValue, currentPaginationNumber } =
     useSelector(filterSelector);
-  const { allProduct, isLoading, currentProductOnPage, limitPage } = useSelector(productSelector);
+  const { allProduct, currentProductOnPage, limitPage } = useSelector(productSelector);
   const dispatch = useDispatch();
 
   const onChangeCategory = (id) => {
@@ -49,7 +50,6 @@ const Menu = () => {
   ]);
 
   const countPage = Math.ceil(currentProductOnPage / limitPage);
-  const skeleton = [...new Array(limitPage)].map((_, index) => <Skeleton key={index} />);
   const productRender = allProduct
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) => <Product key={product.id} {...product} />);
@@ -61,13 +61,7 @@ const Menu = () => {
         <Sort />
       </div>
       <Categories value={activeCategory} onChangeCategory={onChangeCategory} />
-      <div className={styles.products}>
-        {isLoading === 'loading' ? skeleton : productRender}
-        {isLoading === 'success' && productRender.length === 0 && (
-          <p className={styles.nothing}>Nothing found</p>
-        )}
-        {isLoading === 'error' && <p className={styles.nothing}>Server error. Try later please.</p>}
-      </div>
+      <Products productRender={productRender} limitPage={limitPage} />
       {productRender.length === limitPage || currentPaginationNumber > 1 ? (
         <Pagination countPage={countPage} />
       ) : null}
