@@ -1,36 +1,12 @@
 import React from 'react';
 import styles from './SingleProduct.module.scss';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import ProductSizes from '../ProductSizes';
 import ProductAddToCart from '../ProductAddToCart';
 
 const categories = ['All', 'Pizza', 'Sushi', 'Burgers', 'Salads', 'Drinkables'];
 
-const SingleProduct = () => {
+const SingleProduct = ({ product }) => {
   const [sizeActive, setSizeActive] = React.useState(0);
-  const [product, setProduct] = React.useState();
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://62e76c9f93938a545bd1363a.mockapi.io/product/${id}`,
-        );
-        setProduct(data);
-      } catch {
-        alert('Sorry, the product could not be found.');
-        navigate('/');
-      }
-    };
-    fetchProduct();
-  }, [id, navigate]);
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
 
   const priceActive = product.price ? product.price[sizeActive] : product.singlePrice;
 

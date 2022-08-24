@@ -14,6 +14,7 @@ const initialState = {
   isLoading: 'loading',
   currentProductOnPage: 0,
   limitPage: 12,
+  similarLimitPage: 4,
 };
 
 export const productSlice = createSlice({
