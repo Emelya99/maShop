@@ -41,7 +41,7 @@ const SingleProduct = () => {
           <img src={product.imgUrl} alt="product" />
         </div>
         <div className={styles.right}>
-          <h1 className={styles.title}>{product.title}</h1>
+          <h2 className={styles.title}>{product.title}</h2>
           <div className={styles.priceBox}>
             <p className={styles.price}>{priceActive} $</p>
             {product.sizes.length > 0 && (

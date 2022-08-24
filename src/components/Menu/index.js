@@ -68,7 +68,7 @@ const Menu = () => {
         )}
         {isLoading === 'error' && <p className={styles.nothing}>Server error. Try later please.</p>}
       </div>
-      {productRender.length === 12 || currentPaginationNumber > 1 ? (
+      {productRender.length === limitPage || currentPaginationNumber > 1 ? (
         <Pagination countPage={countPage} />
       ) : null}
     </>
