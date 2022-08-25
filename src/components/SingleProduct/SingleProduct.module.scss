@@ -21,6 +21,11 @@
 .title {
     font-size: 36px;
     line-height: 42px;
+    text-transform: lowercase;
+
+    &::first-line {
+        text-transform: capitalize;
+    }
 }
 
 .priceBox {
@@ -79,6 +84,10 @@
 }
 
 @media(max-width:1024px){
+
+    .content {
+        margin-bottom: 100px;
+    }
 
     .right {
 
@@ -140,6 +149,10 @@
 }
 
 @media(max-width:767px){
+    
+    .content {
+        margin-bottom: 60px;
+    }
 
     .left {
         padding: 0;
@@ -151,5 +164,11 @@
     .right {
         width: 100%;
         padding: 0;
+    }
+
+    .price,
+    .title {
+        font-size: 26px;
+        line-height: 32px;
     }
 }

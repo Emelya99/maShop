@@ -4,3 +4,21 @@
         margin-bottom: 50px;
     }
 }
+
+@media(max-width:1024px){
+
+    .wrapper {
+        margin-bottom: -70px;
+    }
+}
+
+@media(max-width:767px){
+
+    .wrapper {
+        margin-bottom: -50px;
+
+        & h1 {
+            margin-bottom: 40px;
+        }
+    }
+}

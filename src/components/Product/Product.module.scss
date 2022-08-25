@@ -73,6 +73,16 @@
     }
 }
 
+@media(max-width:767px){
+
+    .product{
+
+        &:hover {
+            transform: none;
+        }
+    }
+}
+
 @media(max-width:560px) {
 
     .product {
