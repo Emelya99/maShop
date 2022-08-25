@@ -5,46 +5,52 @@ import ProductAddToCart from '../ProductAddToCart';
 
 const categories = ['All', 'Pizza', 'Sushi', 'Burgers', 'Salads', 'Drinkables'];
 
-const SingleProduct = ({ product }) => {
+const SingleProduct = ({
+  id,
+  title,
+  imgUrl,
+  sizes,
+  price,
+  singlePrice,
+  desc,
+  rating,
+  category,
+}) => {
   const [sizeActive, setSizeActive] = React.useState(0);
 
-  const priceActive = product.price ? product.price[sizeActive] : product.singlePrice;
+  const priceActive = price ? price[sizeActive] : singlePrice;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.left}>
-          <img src={product.imgUrl} alt="product" />
+          <img src={imgUrl} alt="product" />
         </div>
         <div className={styles.right}>
-          <h2 className={styles.title}>{product.title}</h2>
+          <h2 className={styles.title}>{title}</h2>
           <div className={styles.priceBox}>
             <p className={styles.price}>{priceActive} $</p>
-            {product.sizes.length > 0 && (
+            {sizes.length > 0 && (
               <div className={styles.variables}>
-                <ProductSizes
-                  sizes={product.sizes}
-                  sizeActive={sizeActive}
-                  setSizeActive={setSizeActive}
-                />
+                <ProductSizes sizes={sizes} sizeActive={sizeActive} setSizeActive={setSizeActive} />
               </div>
             )}
           </div>
-          <p className={styles.desc}>{product.desc}</p>
+          <p className={styles.desc}>{desc}</p>
           <div className={styles.addToCart}>
             <ProductAddToCart
-              id={product.id}
-              title={product.title}
-              imgUrl={product.imgUrl}
-              sizes={product.sizes}
+              id={id}
+              title={title}
+              imgUrl={imgUrl}
+              sizes={sizes}
               sizeActive={sizeActive}
               priceActive={priceActive}
             />
           </div>
           <ul className={styles.properties}>
-            <li>SKU: {product.id}</li>
-            <li>Category: {categories[product.category]}</li>
-            <li>Rating: {product.rating}/10</li>
+            <li>SKU: {id}</li>
+            <li>Category: {categories[category]}</li>
+            <li>Rating: {rating}/10</li>
           </ul>
         </div>
       </div>

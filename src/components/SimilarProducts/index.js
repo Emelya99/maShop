@@ -9,7 +9,7 @@ import Products from '../Products';
 import { useSelector } from 'react-redux';
 import { productSelector } from '../../redux/slices/productSlice';
 
-const SimilarProducts = ({ products, id }) => {
+const SimilarProducts = ({ products, id, isLoading }) => {
   const { similarLimitPage } = useSelector(productSelector);
 
   const productRender = products
@@ -21,7 +21,7 @@ const SimilarProducts = ({ products, id }) => {
   return (
     <div className={styles.wrapper}>
       <Title title="Similar products" />
-      <Products productRender={productRender} limitPage={similarLimitPage} />
+      <Products productRender={productRender} limitPage={similarLimitPage} isLoading={isLoading} />
     </div>
   );
 };

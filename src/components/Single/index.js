@@ -47,7 +47,7 @@ const Single = () => {
 
   return (
     <>
-      <SingleProduct product={product} />
+      <SingleProduct {...product} />
       <SimilarProducts products={products} id={id} isLoading={isLoading} />
     </>
   );
