@@ -1,11 +1,7 @@
 import styles from './Products.module.scss';
-import { useSelector } from 'react-redux';
-import { productSelector } from '../../redux/slices/productSlice';
 import Skeleton from '../Menu/Skeleton';
 
-const Products = ({ productRender, limitPage }) => {
-  const { isLoading } = useSelector(productSelector);
-
+const Products = ({ productRender, limitPage, isLoading }) => {
   const skeleton = [...new Array(limitPage)].map((_, index) => <Skeleton key={index} />);
 
   return (

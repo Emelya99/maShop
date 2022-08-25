@@ -16,7 +16,7 @@ import { fetchProducts, productSelector } from '../../redux/slices/productSlice'
 const Menu = () => {
   const { activeCategory, sort, searchValue, currentPaginationNumber } =
     useSelector(filterSelector);
-  const { allProduct, currentProductOnPage, limitPage } = useSelector(productSelector);
+  const { allProduct, currentProductOnPage, limitPage, isLoading } = useSelector(productSelector);
   const dispatch = useDispatch();
 
   const onChangeCategory = (id) => {
@@ -61,7 +61,7 @@ const Menu = () => {
         <Sort />
       </div>
       <Categories value={activeCategory} onChangeCategory={onChangeCategory} />
-      <Products productRender={productRender} limitPage={limitPage} />
+      <Products productRender={productRender} limitPage={limitPage} isLoading={isLoading} />
       {productRender.length === limitPage || currentPaginationNumber > 1 ? (
         <Pagination countPage={countPage} />
       ) : null}
