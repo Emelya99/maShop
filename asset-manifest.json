@@ -1,13 +1,25 @@
 {
   "files": {
-    "main.css": "/maShop/static/css/main.aee3838c.css",
-    "main.js": "/maShop/static/js/main.08279ee3.js",
+    "main.css": "/maShop/static/css/main.ae5a4e72.css",
+    "main.js": "/maShop/static/js/main.28b5c712.js",
+    "static/css/253.3e39d83c.chunk.css": "/maShop/static/css/253.3e39d83c.chunk.css",
+    "static/js/253.f4486916.chunk.js": "/maShop/static/js/253.f4486916.chunk.js",
+    "static/css/713.445a4847.chunk.css": "/maShop/static/css/713.445a4847.chunk.css",
+    "static/js/713.7f2edf70.chunk.js": "/maShop/static/js/713.7f2edf70.chunk.js",
+    "static/css/190.427a7eb2.chunk.css": "/maShop/static/css/190.427a7eb2.chunk.css",
+    "static/js/190.6ca45670.chunk.js": "/maShop/static/js/190.6ca45670.chunk.js",
     "index.html": "/maShop/index.html",
-    "main.aee3838c.css.map": "/maShop/static/css/main.aee3838c.css.map",
-    "main.08279ee3.js.map": "/maShop/static/js/main.08279ee3.js.map"
+    "main.ae5a4e72.css.map": "/maShop/static/css/main.ae5a4e72.css.map",
+    "main.28b5c712.js.map": "/maShop/static/js/main.28b5c712.js.map",
+    "253.3e39d83c.chunk.css.map": "/maShop/static/css/253.3e39d83c.chunk.css.map",
+    "253.f4486916.chunk.js.map": "/maShop/static/js/253.f4486916.chunk.js.map",
+    "713.445a4847.chunk.css.map": "/maShop/static/css/713.445a4847.chunk.css.map",
+    "713.7f2edf70.chunk.js.map": "/maShop/static/js/713.7f2edf70.chunk.js.map",
+    "190.427a7eb2.chunk.css.map": "/maShop/static/css/190.427a7eb2.chunk.css.map",
+    "190.6ca45670.chunk.js.map": "/maShop/static/js/190.6ca45670.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.aee3838c.css",
-    "static/js/main.08279ee3.js"
+    "static/css/main.ae5a4e72.css",
+    "static/js/main.28b5c712.js"
   ]
 }
