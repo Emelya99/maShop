@@ -10,6 +10,7 @@ import { productSelector } from '../../redux/slices/productSlice';
 import axios from 'axios';
 
 const Single = () => {
+  const [isLoading, setIsLoading] = React.useState('loading');
   const [product, setProduct] = React.useState();
   const [products, setProducts] = React.useState();
 
@@ -18,6 +19,7 @@ const Single = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
+    setIsLoading('loading');
     const fetchProduct = async () => {
       try {
         const getProduct = await axios.get(
@@ -28,23 +30,25 @@ const Single = () => {
         );
         setProduct(getProduct.data);
         setProducts(getProducts.data.items);
+        setIsLoading('success');
       } catch {
         alert('Sorry, the product could not be found.');
         navigate('/');
+        setIsLoading('error');
       }
     };
     fetchProduct();
     window.scrollTo(0, 0);
   }, [id, navigate, similarLimitPage]);
 
-  if (!product) {
+  if (isLoading === 'loading') {
     return <div>Loading...</div>;
   }
 
   return (
     <>
       <SingleProduct product={product} />
-      <SimilarProducts products={products} id={id} />
+      <SimilarProducts products={products} id={id} isLoading={isLoading} />
     </>
   );
 };
