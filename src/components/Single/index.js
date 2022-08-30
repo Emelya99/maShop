@@ -1,54 +1,36 @@
 import React from 'react';
 
-import SimilarProducts from '../SimilarProducts';
 import SingleProduct from '../SingleProduct';
+// import SimilarProducts from '../SimilarProducts';
 
-import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { productSelector } from '../../redux/slices/productSlice';
-
-import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchSingleProduct } from '../../redux/slices/singleSlice';
 
 const Single = () => {
-  const [isLoading, setIsLoading] = React.useState('loading');
-  const [product, setProduct] = React.useState();
-  const [products, setProducts] = React.useState();
-
-  const { similarLimitPage } = useSelector(productSelector);
   const { id } = useParams();
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    setIsLoading('loading');
-    const fetchProduct = async () => {
-      try {
-        const getProduct = await axios.get(
-          `https://62e76c9f93938a545bd1363a.mockapi.io/product/${id}`,
-        );
-        const getProducts = await axios.get(
-          `https://62e76c9f93938a545bd1363a.mockapi.io/product?category=${getProduct.data.category}`,
-        );
-        setProduct(getProduct.data);
-        setProducts(getProducts.data.items);
-        setIsLoading('success');
-      } catch {
-        alert('Sorry, the product could not be found.');
-        navigate('/');
-        setIsLoading('error');
-      }
-    };
-    fetchProduct();
+    // const fetchProduct = async () => {
+    //   try {
+    //     const getProducts = await axios.get(
+    //       `https://62e76c9f93938a545bd1363a.mockapi.io/product?category=${getProduct.data.category}`,
+    //     );
+    //     setProducts(getProducts.data.items);
+    //   } catch {
+    //     alert('Sorry, the product could not be found.');
+    //     navigate('/');
+    //   }
+    // };
+    dispatch(fetchSingleProduct({ id }));
     window.scrollTo(0, 0);
-  }, [id, navigate, similarLimitPage]);
-
-  if (isLoading === 'loading') {
-    return <div>Loading...</div>;
-  }
+  }, [id, dispatch]);
 
   return (
     <>
-      <SingleProduct {...product} />
-      <SimilarProducts products={products} id={id} isLoading={isLoading} />
+      <SingleProduct />
+      {/* <SimilarProducts /> */}
     </>
   );
 };

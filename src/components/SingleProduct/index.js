@@ -3,22 +3,25 @@ import styles from './SingleProduct.module.scss';
 import ProductSizes from '../ProductSizes';
 import ProductAddToCart from '../ProductAddToCart';
 
+// import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 const categories = ['All', 'Pizza', 'Sushi', 'Burgers', 'Salads', 'Drinkables'];
 
-const SingleProduct = ({
-  id,
-  title,
-  imgUrl,
-  sizes,
-  price,
-  singlePrice,
-  desc,
-  rating,
-  category,
-}) => {
+const SingleProduct = () => {
   const [sizeActive, setSizeActive] = React.useState(0);
+  // const navigate = useNavigate();
+
+  const isLoading = useSelector((state) => state.single.isLoading);
+  const { id, title, imgUrl, sizes, price, singlePrice, desc, rating, category } = useSelector(
+    (state) => state.single.singleProduct,
+  );
 
   const priceActive = price ? price[sizeActive] : singlePrice;
+
+  if (isLoading === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.wrapper}>
