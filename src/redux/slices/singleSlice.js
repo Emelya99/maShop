@@ -5,7 +5,7 @@ export const fetchSingleProduct = createAsyncThunk(
   'single/fetchSingleProductStatus',
   async (params) => {
     const { id } = params;
-    const { data } = await axios.get(`https://-62e76c9f93938a545bd1363a.mockapi.io/product/${id}`);
+    const { data } = await axios.get(`https://62e76c9f93938a545bd1363a.mockapi.io/product/${id}`);
 
     return data;
   },
@@ -23,6 +23,9 @@ export const singleSlice = createSlice({
     setSingleProduct(state, action) {
       state.products = action.payload;
     },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
+    },
   },
   extraReducers: {
     [fetchSingleProduct.pending]: (state) => {
@@ -35,11 +38,10 @@ export const singleSlice = createSlice({
     },
     [fetchSingleProduct.rejected]: (state) => {
       state.isLoading = 'error';
-      state.singleProduct = {};
     },
   },
 });
 
-export const { setSingleProduct } = singleSlice.actions;
+export const { setSingleProduct, setIsLoading } = singleSlice.actions;
 
 export default singleSlice.reducer;

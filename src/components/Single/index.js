@@ -12,17 +12,6 @@ const Single = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    // const fetchProduct = async () => {
-    //   try {
-    //     const getProducts = await axios.get(
-    //       `https://62e76c9f93938a545bd1363a.mockapi.io/product?category=${getProduct.data.category}`,
-    //     );
-    //     setProducts(getProducts.data.items);
-    //   } catch {
-    //     alert('Sorry, the product could not be found.');
-    //     navigate('/');
-    //   }
-    // };
     dispatch(fetchSingleProduct({ id }));
     window.scrollTo(0, 0);
   }, [id, dispatch]);
