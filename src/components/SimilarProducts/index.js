@@ -6,13 +6,21 @@ import Title from '../Title';
 import Product from '../Product';
 import Products from '../Products';
 
-import { useSelector } from 'react-redux';
-import { productSelector } from '../../redux/slices/productSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { similarSelector } from '../../redux/slices/similarSlice';
 
-const SimilarProducts = ({ products, id, isLoading }) => {
-  const { similarLimitPage } = useSelector(productSelector);
+import { fetchSimilarProducts } from '../../redux/slices/similarSlice';
 
-  const productRender = products
+const SimilarProducts = () => {
+  const { similarLimitPage, isLoading, similarProducts } = useSelector(similarSelector);
+  const { id, category } = useSelector((state) => state.single.singleProduct);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchSimilarProducts({ category }));
+  }, [category, dispatch]);
+
+  const productRender = similarProducts
     .filter((obj) => obj.id !== id)
     .sort(() => Math.random() - Math.random())
     .slice(0, similarLimitPage)

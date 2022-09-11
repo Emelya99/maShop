@@ -1,15 +1,16 @@
 import React from 'react';
 
 import SingleProduct from '../SingleProduct';
-// import SimilarProducts from '../SimilarProducts';
+import SimilarProducts from '../SimilarProducts';
 
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchSingleProduct } from '../../redux/slices/singleSlice';
 
 const Single = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.single.isLoading);
 
   React.useEffect(() => {
     dispatch(fetchSingleProduct({ id }));
@@ -19,7 +20,7 @@ const Single = () => {
   return (
     <>
       <SingleProduct />
-      {/* <SimilarProducts /> */}
+      {isLoading === 'success' && <SimilarProducts />}
     </>
   );
 };
