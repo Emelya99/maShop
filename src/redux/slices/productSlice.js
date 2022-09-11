@@ -6,7 +6,6 @@ export const fetchProducts = createAsyncThunk('product/fetchProductsStatus', asy
   const { data } = await axios.get(
     `https://62e76c9f93938a545bd1363a.mockapi.io/product?page=${currentPaginationNumber}&limit=${limitPage}&${category}&sortBy=${sortValue}&order=${order}&search=${searchValue}`,
   );
-  console.log(data);
   return data;
 });
 
