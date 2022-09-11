@@ -5,9 +5,10 @@ import ProductAddToCart from '../ProductAddToCart';
 
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { setIsLoading } from '../../redux/slices/singleSlice';
 
-const categories = ['All', 'Pizza', 'Sushi', 'Burgers', 'Salads', 'Drinkables'];
+import { productSelector } from '../../redux/slices/productSlice';
 
 const SingleProduct = () => {
   const [sizeActive, setSizeActive] = React.useState(0);
@@ -18,6 +19,7 @@ const SingleProduct = () => {
   const { id, title, imgUrl, sizes, price, singlePrice, desc, rating, category } = useSelector(
     (state) => state.single.singleProduct,
   );
+  const { categories } = useSelector(productSelector);
 
   const priceActive = price ? price[sizeActive] : singlePrice;
 

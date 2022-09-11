@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from './Categories.module.scss';
 
+import { useSelector } from 'react-redux';
+import { productSelector } from '../../redux/slices/productSlice';
+
 const Categories = ({ value, onChangeCategory }) => {
-  const categories = ['All', 'Pizza', 'Sushi', 'Burgers', 'Salads', 'Drinkables'];
+  const { categories } = useSelector(productSelector);
 
   const onClickCategory = (index) => {
     onChangeCategory(index);
