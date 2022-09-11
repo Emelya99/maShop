@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/maShop/static/css/main.38071271.css",
-    "main.js": "/maShop/static/js/main.a727f7b7.js",
+    "main.js": "/maShop/static/js/main.7a960bb0.js",
     "static/css/253.3e39d83c.chunk.css": "/maShop/static/css/253.3e39d83c.chunk.css",
     "static/js/253.f4486916.chunk.js": "/maShop/static/js/253.f4486916.chunk.js",
     "static/css/713.52493785.chunk.css": "/maShop/static/css/713.52493785.chunk.css",
     "static/js/713.798f53d8.chunk.js": "/maShop/static/js/713.798f53d8.chunk.js",
     "index.html": "/maShop/index.html",
     "main.38071271.css.map": "/maShop/static/css/main.38071271.css.map",
-    "main.a727f7b7.js.map": "/maShop/static/js/main.a727f7b7.js.map",
+    "main.7a960bb0.js.map": "/maShop/static/js/main.7a960bb0.js.map",
     "253.3e39d83c.chunk.css.map": "/maShop/static/css/253.3e39d83c.chunk.css.map",
     "253.f4486916.chunk.js.map": "/maShop/static/js/253.f4486916.chunk.js.map",
     "713.52493785.chunk.css.map": "/maShop/static/css/713.52493785.chunk.css.map",
@@ -16,6 +16,6 @@
   },
   "entrypoints": [
     "static/css/main.38071271.css",
-    "static/js/main.a727f7b7.js"
+    "static/js/main.7a960bb0.js"
   ]
 }
