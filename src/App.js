@@ -6,10 +6,10 @@ import './style.scss';
 
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
+import NotFoundPage from './pages/NotFoundPage';
 
 const CartPage = React.lazy(() => import('./pages/CartPage'));
 const SingleProductPage = React.lazy(() => import('./pages/SingleProductPage'));
-const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   return (
