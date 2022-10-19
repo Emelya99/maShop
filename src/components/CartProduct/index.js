@@ -1,6 +1,8 @@
 import React from 'react';
 import Icon from '../IconsGenerator';
 import styles from './CartProduct.module.scss';
+
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { removeItem, addItem, onMinusCount } from '../../redux/slices/cartSlice';
 
@@ -29,9 +31,13 @@ const CartProduct = ({ id, title, count, price, imgUrl, size }) => {
   return (
     <div className={styles.product}>
       <div className={styles.left}>
-        <img src={imgUrl} alt={title} />
+        <Link to={`/${id}`} className={styles.img}>
+          <img src={imgUrl} alt={title} />
+        </Link>
         <div className={styles.info}>
-          <h3>{title}</h3>
+          <Link to={`/${id}`} className={styles.title}>
+            {title}
+          </Link>
           <p>{size}</p>
         </div>
       </div>
