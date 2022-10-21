@@ -20,6 +20,11 @@ const Cart = () => {
     }
   };
 
+  const onClickPay = (e) => {
+    alert('Unfortunately "Pay" is under development.');
+    e.preventDefault();
+  };
+
   if (!totalCount) {
     return <CartEmpty />;
   }
@@ -52,8 +57,9 @@ const Cart = () => {
           <p>
             Order price: <span>{totalPrice} $</span>
           </p>
-          {}
-          <Link to="/">Pay</Link>
+          <Link to="/" onClick={onClickPay}>
+            Pay
+          </Link>
         </div>
       </div>
     </div>
